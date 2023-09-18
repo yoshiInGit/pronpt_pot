@@ -16,6 +16,12 @@ const Wrapper = styled.div<{isShadow : boolean}>`
 const HomeBtn = styled.span`
     font-size: 28px;
 `
+
+const MenuBtn = styled.span`
+    font-size: 28px;
+`
+
+
 const Title = styled.span`
     letter-spacing: 2px;
     font-family: 'Roboto', sans-serif;
@@ -37,15 +43,47 @@ const PostBtn = styled.div`
 const Space = styled.div`
     flex-grow: 1;
 `
-const Header = ({isShadow = true} : {isShadow? : boolean}) => {
+
+type props = {
+    isShadow? : boolean,
+    home?     : boolean,
+    menu?     : boolean,
+    post?     : boolean,
+}
+
+const Header = ({isShadow = true, home=false, menu=false, post=false} : props) => {
+    const leadings = [];
+    if(menu===true){
+        leadings.push(
+            <MenuBtn className="material-icons">menu</MenuBtn>
+        );
+    }
+
+    if(home===true){
+        leadings.push(
+            <HomeBtn className="material-icons">home</HomeBtn>
+        );
+    }
+
+    const tailings = []
+    if(post===true){
+        tailings.push(
+            <PostBtn>投稿</PostBtn>
+        )
+    }
+
     return(
         <>
             <Wrapper isShadow={isShadow}>
                 <SpaceBox width={8}/>
-                <HomeBtn className="material-icons">menu</HomeBtn>
+
+                {leadings}
+                
                 <Title>Prompt Pot</Title>
                 <Space/>
-                <PostBtn>投稿</PostBtn>
+                
+                {tailings}
+                
                 <SpaceBox width={8}/>
             </Wrapper>
         </>

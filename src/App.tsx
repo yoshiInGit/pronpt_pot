@@ -1,9 +1,10 @@
 import HomePage from "./view/HomePage"
+import PostPage from "./view/PostPage"
 
 function App() {
   return (
     <>
-    <HomePage/>
+    <PostPage/>
     </>
   )
 }
