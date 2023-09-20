@@ -1,101 +1,73 @@
 import styled from "styled-components"
-import Header from "./compionents/Header";
-import PromptCard from "./compionents/PromptCard";
-import SpaceBox from "./compionents/SpaceBox";
-import Fab from "./compionents/fab";
+import Header from "./components/basic/Header";
+import PromptCard from "./components/common/PromptCard";
+import SpaceBox from "./components/layout/SpaceBox";
+import Column from "./components/layout/Column";
+import Icon from "./components/basic/Icon";
 
-const Back = styled.div`
-    background-color: #DCDCDC;
-    width: 100%;
-    height: 100vh;
-`
+const Selector = () => {
+    const SelectorWrapper = styled.div`
+        z-index          : 100;
+        position         : fixed;
+        top              : 56px;
+        width            : 100%;
+        height           : 56px;
+        background-color : white;
+        filter           : drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.41));
+        display          : flex;
+    `
 
-// Selector
-const SelectorWrapper = styled.div`
-    z-index: 100;
-    position: fixed;
-    top: 56px;
-    width: 100%;
-    height: 56px;
-    background-color: white;
-    filter: drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.41));
-    display: flex;
-`
-const SelectorBtn = styled.div<{isActive : boolean}>`
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    ${(props) => props.isActive && `color: #A7005A;`};
-`
-const SelectorItemIcon = styled.span`
+    const SelectorBtn = styled.div<{isActive : boolean}>`
+        flex-grow       : 1;
+        display         : flex;
+        flex-direction  : column;
+        align-items     : center;
+        justify-content : center;
+        ${(props) => props.isActive && `color: #A7005A;`};
+    `
 
-`
-
-const SelectorItemName = styled.span`
-    font-family: 'Lacquer', cursive;
-    font-family: 'Press Start 2P', cursive;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bolder;
-    font-size: 12px;
-`
-
-const Body = styled.div`
-    display: flex;
-`
-
-const Content = styled.div`
-    flex-grow: 1;
-`
-
-const Selector = () => (
-    <>
+    const SelectorItemName = styled.span`
+        font-family : 'Roboto', sans-serif;
+        font-weight : bolder;
+        font-size   : 12px;
+    `
+    return(
         <SelectorWrapper>
             <SelectorBtn isActive={true}>
-                <SelectorItemIcon className="material-icons">local_fire_department</SelectorItemIcon>
+                <Icon name="local_fire_department"/>
                 <SelectorItemName>Hot</SelectorItemName>
-            </SelectorBtn>
+             </SelectorBtn>
 
-            <SelectorBtn isActive={false}>
-                <SelectorItemIcon className="material-icons">lightbulb_outline</SelectorItemIcon>
+             <SelectorBtn isActive={false}>
+                <Icon name="lightbulb_outline"/>
                 <SelectorItemName>New</SelectorItemName>
-            </SelectorBtn>
+             </SelectorBtn>
 
-            <SelectorBtn isActive={false}>
-                <SelectorItemIcon className="material-icons">shuffle</SelectorItemIcon>
+             <SelectorBtn isActive={false}>
+                <Icon name="shuffle"/>
                 <SelectorItemName>Random</SelectorItemName>
-            </SelectorBtn>
+             </SelectorBtn>             
         </SelectorWrapper>
-
-        <SpaceBox height={140}/>
-
-        <Body>
-            <SpaceBox width={16}/>
-            <Content>
-                <PromptCard/>
-                <SpaceBox height={20}/>
-                <PromptCard/>
-                <SpaceBox height={20}/>
-                <PromptCard/>
-                <SpaceBox height={20}/>
-
-
-            </Content>
-            <SpaceBox width={16}/>
-        </Body>
-
-        <Fab/>
-    </>
-);
+    );
+};
 
 const HomePage = () => {
     return(
     <>
-        <Back>
-            <Header isShadow={false}/>
-            <Selector/>
-        </Back>
+        <Header isShadow={false} menu/>
+        <Selector/>
+        <Column 
+            center
+            color="#DCDCDC"
+            padding={16}
+            gap={20}>
+                <SpaceBox height={116}/>
+                <PromptCard/>
+                <PromptCard/>
+                <PromptCard/>
+
+                <SpaceBox height={56}/>
+        </Column>
     </>
     )   
 }

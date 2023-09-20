@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Header from "./compionents/Header";
-import SpaceBox from "./compionents/SpaceBox";
+import Header from "./components/basic/Header";
+import SpaceBox from "./components/layout/SpaceBox";
 
 const MyPage = () => {
     const Back = styled.div`
@@ -57,7 +57,7 @@ const MyPage = () => {
                         <SpaceBox height={32}/>
 
                         <Card>
-                            
+
                         </Card>
                     </Content>
                     <SpaceBox width={16}/>

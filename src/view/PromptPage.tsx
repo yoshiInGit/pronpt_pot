@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import Header from "./compionents/Header";
-import SpaceBox from "./compionents/SpaceBox";
-import GrowSpace from "./compionents/GrowSpace";
-import Fab from "./compionents/fab";
+import Header from "./components/basic/Header";
+import SpaceBox from "./components/layout/SpaceBox";
+import GrowSpace from "./components/layout/GrowSpace";
 
 const Back = styled.div`
         background-color: #DCDCDC;
@@ -197,7 +196,7 @@ const PromptPage = () => {
                     <SpaceBox width={16}/>
                 </Body>
 
-                <Fab/>
+                
             </Back>
         </>
     );

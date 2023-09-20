@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SpaceBox from "./SpaceBox";
+import SpaceBox from "../layout/SpaceBox";
 import { useRef } from "react";
 
 const Card = styled.div`

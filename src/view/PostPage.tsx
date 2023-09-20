@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Header from "./compionents/Header";
-import SpaceBox from "./compionents/SpaceBox";
-import PostCard from "./compionents/PostCard";
+import Header from "./components/basic/Header";
+import SpaceBox from "./components/layout/SpaceBox";
+import PostCard from "./components/common/PostCard";
 
 const Back = styled.div`
         background-color: #DCDCDC;
