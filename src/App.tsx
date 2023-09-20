@@ -5,7 +5,7 @@ import PromptPage from "./view/PromptPage"
 function App() {
   return (
     <>
-    <PromptPage/>
+    <PostPage/>
     </>
   )
 }
