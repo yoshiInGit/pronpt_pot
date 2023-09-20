@@ -1,27 +1,11 @@
 import styled from "styled-components";
 import Header from "./components/basic/Header";
 import SpaceBox from "./components/layout/SpaceBox";
+import Column from "./components/layout/Column";
+import Back from "./components/basic/Back";
+import Card from "./components/basic/Card";
 
 const MyPage = () => {
-    const Back = styled.div`
-        width: 100%;
-        height : 100vh;
-    `
-
-    const Body = styled.div`
-        padding-top: 56px;
-        display: flex;
-    `
-
-    const Content = styled.div`
-        flex-grow: 1;
-    `
-
-    const Card = styled.div`
-        width: 100%;
-        background-color: white;
-        border-radius: 3px;
-    `
     const UserName = styled.div`
         height: 56px;
         color: #4e4e4e;
@@ -34,36 +18,32 @@ const MyPage = () => {
     const UserInfo = styled.div`
 
     `
-
     return(
-        <>
-            <Back>
-                <Header home/>
-                
-                <Body>
-                    <SpaceBox width={16}/>
-                    <Content>
-                        <Card>
-                            <SpaceBox height={32}/>
-                            <UserName>user</UserName>
-                            <SpaceBox height={32}/>
-                            <UserInfo>
-                                Twitter : 
-                                <br></br>
-                                Twitter : 
-                            </UserInfo>
-                        </Card>
+        <Back>
+            <Header home/>
+
+            <Column padding={16}>
+                <SpaceBox height={72}/>
+
+                <Card>
+                    <Column padding={16}>
+                        <UserName>user</UserName>
 
                         <SpaceBox height={32}/>
 
-                        <Card>
+                        <UserInfo>
+                             Twitter : 
+                             <br></br>
+                             Twitter : 
+                        </UserInfo>
 
-                        </Card>
-                    </Content>
-                    <SpaceBox width={16}/>
-                </Body>
-            </Back>
-        </>
+                        <SpaceBox height={16}/>
+                    </Column>
+                </Card>
+
+            </Column>
+        </Back>
+
     );
 }
 
