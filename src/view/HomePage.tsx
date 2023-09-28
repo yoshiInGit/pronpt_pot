@@ -5,7 +5,6 @@ import SpaceBox from "./components/layout/SpaceBox";
 import Column from "./components/layout/Column";
 import Icon from "./components/basic/Icon";
 import { useState } from 'react';
-import { useGetPrompts } from '../usecase/prompt_usecase'
 
 const HomePage = () => {
     const [mode, setMode] = useState(Mode.Hot);
