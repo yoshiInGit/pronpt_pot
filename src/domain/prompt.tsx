@@ -6,7 +6,7 @@ type promtParams = {
     memo   : string,
     book   : number,
     aiName : string,
-    user   : User,
+    user   : string,
 }
 
 class Prompt{
@@ -17,7 +17,7 @@ class Prompt{
     memo   : string
     book   : number
     aiName : string
-    user   : User
+    user   : string
 
     constructor({uuid, title, prompt, ans, memo, book, aiName, user}:promtParams){
         this.uuid   = uuid;
