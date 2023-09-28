@@ -22,7 +22,7 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
         `
         return(
             <Wrapper>
-                <User>{prompt.user.name}</User>
+                <User>{""}</User>
                 <GrowSpace/>
                 <Icon name="link"/>
                 <Icon name="content_copy"/>
