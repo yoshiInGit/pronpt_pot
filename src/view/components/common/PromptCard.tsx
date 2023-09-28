@@ -7,7 +7,7 @@ import Column from "../layout/Column";
 import Row from "../layout/Row";
 
 
-const PromptCard = () => {
+const PromptCard = ({prompt} : {prompt : Prompt}) => {
     const Head = () => {
 
         const Wrapper = styled.div`
@@ -22,7 +22,7 @@ const PromptCard = () => {
         `
         return(
             <Wrapper>
-                <User>user</User>
+                <User>{prompt.user.name}</User>
                 <GrowSpace/>
                 <Icon name="link"/>
                 <Icon name="content_copy"/>
@@ -76,11 +76,11 @@ const PromptCard = () => {
             <Wrapper>
                 <Row center>
                     <Icon color="#FF004D" name="bookmark_border"/>
-                    <BookNum>77</BookNum>
+                    <BookNum>{prompt.book}</BookNum>
 
                     <SpaceBox width={8}/>
 
-                    <AIName>ChatGPT</AIName>
+                    <AIName>{prompt.aiName}</AIName>
 
                     <GrowSpace/>
                 </Row>
@@ -97,16 +97,16 @@ const PromptCard = () => {
 
                     <Head/>
 
-                    <Title>企画書テンプレ</Title>
+                    <Title>{prompt.title}</Title>
 
-                    <Prompt>あなた、会社の社員です。以下の要件を満たすような企画書を書きなさい。1．あああああああ2．いいいいいいい３．うううううう</Prompt>
+                    <Prompt>{prompt.prompt}</Prompt>
 
                     <SpaceBox height={16}/>
 
                     <Msg>
                         Ex
                         <br></br>
-                        書のテンプレートです。企画書を作成する際に参考にしてください。[企画書のタイトル]概要プロジェクトの名前:提案者の名前/組織名:提案日概要プロジェクトの名前:提案者の名前/組織名:提案日…
+                        {prompt.ans}
                     </Msg>
 
                     <SpaceBox height={28}/>
@@ -119,46 +119,6 @@ const PromptCard = () => {
 
         </Card>
     );
-
-    // return (
-    //     <>
-    //     <Card>
-    //         <Head>
-    //             <SpaceBox width={8}/>
-    //             <User>user</User>
-    //             <Space/>
-    //             <ActionBtn>X</ActionBtn>
-    //             <ActionBtn className="material-icons">link</ActionBtn>
-    //             <ActionBtn className="material-icons">content_copy</ActionBtn>
-    //             <SpaceBox width={8}/>
-    //         </Head>
-
-    //         <Title>企画書テンプレ</Title>
-
-    //         <Prompt>あなた、会社の社員です。以下の要件を満たすような企画書を書きなさい。1．あああああああ2．いいいいいいい３．うううううう</Prompt>
-        
-    //         <SpaceBox height={28}/>
-
-    //         <Msg>
-    //             Ex
-    //             <br></br>
-    //             書のテンプレートです。企画書を作成する際に参考にしてください。[企画書のタイトル]概要プロジェクトの名前:提案者の名前/組織名:提案日概要プロジェクトの名前:提案者の名前/組織名:提案日…
-    //         </Msg>
-
-    //         <SpaceBox height={12}/>
-
-    //         <Footer>
-    //             <SpaceBox width={12}/>
-    //             <Book className="material-icons">bookmark_border</Book>
-    //             <BookNum>77</BookNum>
-    //             <SpaceBox width={8}/>
-    //             <AIName>ChatGPT</AIName>
-    //         </Footer>
-
-    //         <SpaceBox height={8}/>
-    //     </Card>
-    //     </>
-    // );
 }
 
 export default PromptCard;
