@@ -8,8 +8,14 @@ import Row from "./components/layout/Row";
 import Icon from "./components/basic/Icon";
 import Card from "./components/basic/Card";
 import Expand from "./components/layout/Expand";
+import { useState } from "react";
+import { usePromptById } from "../usecase/prompt_use_case";
 
 const PromptPage = () => {
+
+    const [promptId, setPromptId] = useState("");
+    const {prompt, isLoading, error}     = usePromptById({id : promptId});
+
     const Wrapper = styled.div`
         width: 100%;
     `
@@ -36,7 +42,7 @@ const PromptPage = () => {
                     <Active isActive>
                     <SpaceBox width={8}/>
                         <Icon name="bookmark_border"/>
-                        77
+                        {prompt.book}
                     </Active>
                 </Row>
             </Wrapper>
@@ -135,13 +141,13 @@ const PromptPage = () => {
                             <SpaceBox height={16}/>
 
                             <Expand row>
-                                <AIName>ChatGPT</AIName>
+                                <AIName>{prompt.aiName}</AIName>
                             </Expand>
 
                             <SpaceBox height={12}/>
 
                             <Expand row>
-                                <Title>企画書テンプレ</Title>
+                                <Title>{prompt.title}</Title>
                             </Expand>
 
 
@@ -160,7 +166,7 @@ const PromptPage = () => {
                             <SpaceBox height={8}/>
 
                             <CopySheet
-                                content="企画書のテンプレを書いて"
+                                content={prompt.prompt}
                             />
 
                             <SpaceBox height={32}/>
@@ -172,7 +178,7 @@ const PromptPage = () => {
                             <SpaceBox height={8}/>
 
                             <CopySheet
-                                content="書のテンプレートです。企画書を作成する際に参考にしてください。[企画書のタイトル]概要プロジェクトの名前:提案者の名前/組織名:提案日概要プロジェクトの名前:提案者の名前/組織名:提案日…"
+                                content={prompt.ans}
                             />
 
                             <SpaceBox height={32}/>

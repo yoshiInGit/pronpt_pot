@@ -5,11 +5,12 @@ import SpaceBox from "./components/layout/SpaceBox";
 import Column from "./components/layout/Column";
 import Icon from "./components/basic/Icon";
 import { useState } from 'react';
+import { usePromptsByMode } from "../usecase/prompt_use_case";
 
 const HomePage = () => {
     const [mode, setMode] = useState(Mode.Hot);
     
-    const {prompts, isLoading} = useGetPrompts({mode : mode});
+    const {prompts, isLoading, error} = usePromptsByMode({mode : mode});
 
     const onModeClick = (mode : Mode) => {
         setMode(mode);

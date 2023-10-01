@@ -4,8 +4,14 @@ import SpaceBox from "./components/layout/SpaceBox";
 import PostCard from "./components/common/PostCard";
 import Back from "./components/basic/Back";
 import Column from "./components/layout/Column";
+import { usePostPrompt } from "../usecase/prompt_use_case";
 
 const PostPage = () => {
+    //TODO
+    // const onSubmit = () => {
+    //     const { response, error, isLoading } = usePostPrompt();
+        
+    // }
     
     const HeadSec = () => {
         const Wrapper = styled.div`
