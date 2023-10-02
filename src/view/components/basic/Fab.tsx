@@ -2,10 +2,10 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 type props  = {
-    child : ReactNode,
+    children : ReactNode,
 }
 
-const Fab = ({child} : props) => {
+const Fab = ({children} : props) => {
     const Wrapper = styled.div`
         position: fixed;
         bottom: 20px;
@@ -25,7 +25,7 @@ const Fab = ({child} : props) => {
     return(
         <>
             <Wrapper>
-                {child}
+                {children}
             </Wrapper>
         </>
     );

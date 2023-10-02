@@ -3,3 +3,5 @@ enum Mode{
     New,
     Random
 }
+
+export default Mode;

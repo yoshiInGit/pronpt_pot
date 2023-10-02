@@ -1,4 +1,7 @@
-class FakePromptRepository implements IPromptRepository{
+import Mode from "../domain/mode";
+import { IPromptRepository } from "./i_prompt_repository";
+
+export class FakePromptRepository implements IPromptRepository{
     
     prompts : Prompt[] = [];
     

@@ -6,6 +6,9 @@ import Column from "./components/layout/Column";
 import Icon from "./components/basic/Icon";
 import { useState } from 'react';
 import { usePromptsByMode } from "../usecase/prompt_use_case";
+import Mode from "../domain/mode";
+import Back from "./components/basic/Back";
+import Fab from "./components/basic/Fab";
 
 const HomePage = () => {
     const [mode, setMode] = useState(Mode.Hot);
@@ -76,6 +79,7 @@ const HomePage = () => {
 
     return(
     <>
+    <Back>
         <Header isShadow={false} menu/>
         <Selector/>
         <Column 
@@ -89,6 +93,15 @@ const HomePage = () => {
 
                 <SpaceBox height={56}/>
         </Column>
+
+        <Fab>
+            <Icon
+                size={36}
+                color="white" 
+                name="add"
+                />
+        </Fab>
+    </Back>
     </>
     )   
 }
