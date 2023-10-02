@@ -5,9 +5,17 @@ import GrowSpace from "../layout/GrowSpace";
 import Icon from "../basic/Icon";
 import Column from "../layout/Column";
 import Row from "../layout/Row";
+import { useSimpleUser } from "../../../usecase/user_use_case";
 
 
 const PromptCard = ({prompt} : {prompt : Prompt}) => {
+    const {user, isLoading, error} = useSimpleUser({id :prompt.userId});
+    
+    let userName : string | undefined = "";
+    if(isLoading==false && error==undefined){
+        userName = user?.name;
+    }
+
     const Head = () => {
 
         const Wrapper = styled.div`
@@ -22,7 +30,7 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
         `
         return(
             <Wrapper>
-                <User>{""}</User>
+                <User>{userName}</User>
                 <GrowSpace/>
                 <Icon name="link"/>
                 <Icon name="content_copy"/>

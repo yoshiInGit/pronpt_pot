@@ -3,16 +3,27 @@ import { useEffect, useState } from "react"
 export const usePromptsByMode = ({mode}:{mode : Mode}) =>{
         const [prompts, setPrompts]     = useState<Prompt[]>([]);
         const [isLoading, setIsLoading] = useState<boolean>(true);
-        const [error, setError] = useState(null);
+        const [error, setError]         = useState(null);
 
-        // TODO fetch prompts
-        useEffect(()=>{},[])
+        useEffect(()=>{
+          try{
+            (async ()=>{
+              const prompts : Prompt[] = await getPromptRepository().getPromptsByMode({mode : mode});
+              setPrompts(prompts);
+              setIsLoading(false);
+            })();
+
+          } catch (e : any){
+            setError(e);
+            setIsLoading(false);
+          }
+        },[])
 
         return {prompts, isLoading, error};
 }
 
 export const usePromptById = ({id} : {id : string}) => {
-    const [prompt, setPrompts]     = useState<Prompt>(new Prompt({
+    const [prompt, setPrompt]     = useState<Prompt>(new Prompt({
         uuid  : "fake",
         title  : "",
         prompt : "",
@@ -20,24 +31,43 @@ export const usePromptById = ({id} : {id : string}) => {
         memo   : "",
         book   : 0,
         aiName : "",
-        user   : ""
+        userId : ""
     }));
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState(null);
 
-    // TODO fetch prompts
-    useEffect(()=>{},[]);
+    useEffect(()=>{
+      try{
+        (async ()=>{
+          const prompt = await getPromptRepository().getPromptById({id:id});
+          setPrompt(prompt);
+          setIsLoading(false);
+        })();
+      } catch(e : any){
+        setError(e);
+        setIsLoading(false);
+      }
+    },[]);
 
     return {prompt, isLoading, error};
 }
 
 
 export const usePostPrompt = ({prompt} : {prompt : Prompt}) => {
-  const [response, setResponse]   = useState(null);
   const [error, setError]         = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  //TODO post prompt
+  useEffect(()=>{
+    try{
+      (async ()=>{
+        await getPromptRepository().addPrompt({prompt : prompt});
+        setIsLoading(false);
+      })()  
+    } catch (e : any){
+      setError(e);
+      setIsLoading(false);
+    }
+  },[]);
 
-  return { response, error, isLoading };
+  return {error, isLoading };
 }

@@ -9,7 +9,7 @@ import { usePostPrompt } from "../usecase/prompt_use_case";
 const PostPage = () => {
     //TODO
     // const onSubmit = () => {
-    //     const { response, error, isLoading } = usePostPrompt();
+    //     const { error, isLoading } = usePostPrompt();
         
     // }
     

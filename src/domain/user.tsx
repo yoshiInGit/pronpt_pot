@@ -21,3 +21,18 @@ class User{
         this.bookPrompts = bookPrompts;
     }
 }
+
+type simpleUserParm = {
+    uuid : string,
+    name : string,
+}
+
+class SimpleUser {
+    uuid : string
+    name : string
+
+    constructor({uuid, name} : simpleUserParm){
+        this.uuid = uuid;
+        this.name = name;
+    }
+}
