@@ -9,6 +9,7 @@ import { usePromptsByMode } from "../usecase/prompt_use_case";
 import Mode from "../domain/mode";
 import Back from "./components/basic/Back";
 import Fab from "./components/basic/Fab";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
     const [mode, setMode] = useState(Mode.Hot);
@@ -94,13 +95,16 @@ const HomePage = () => {
                 <SpaceBox height={56}/>
         </Column>
 
-        <Fab>
-            <Icon
-                size={36}
-                color="white" 
-                name="add"
-                />
-        </Fab>
+        <Link to="/post">
+            <Fab>
+                <Icon
+                    size={36}
+                    color="white" 
+                    name="add"
+                    />
+            </Fab>
+        </Link>    
+
     </Back>
     </>
     )   

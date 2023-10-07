@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SpaceBox from "../layout/SpaceBox";
+import { Link } from "react-router-dom";
 
 type props = {
     isShadow? : boolean,
@@ -60,7 +61,9 @@ const Header = ({isShadow = true, home=false, menu=false, post=false} : props) =
 
     if(home===true){
         leadings.push(
-            <HomeBtn className="material-icons">home</HomeBtn>
+            <Link to="/">
+                <HomeBtn className="material-icons">home</HomeBtn>
+            </Link>
         );
     }
 

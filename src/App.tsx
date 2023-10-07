@@ -4,6 +4,7 @@ import MyPage from "./view/MyPage"
 import PostPage from "./view/PostPage"
 import PromptPage from "./view/PromptPage"
 import ErrorBoundary from "./ErrorBoundary";
+import { Route, Routes } from "react-router-dom";
 
 
 
@@ -11,7 +12,10 @@ function App() {
   return (
     <>
     <ErrorBoundary>
-      <HomePage/>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/post" element={<PostPage/>}/>
+      </Routes>
     </ErrorBoundary>
     </>
   )
