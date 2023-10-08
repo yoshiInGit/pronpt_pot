@@ -11,6 +11,33 @@ import Back from "./components/basic/Back";
 import Fab from "./components/basic/Fab";
 import { Link } from "react-router-dom";
 
+const SelectorWrapper = styled.div`
+    z-index          : 100;
+    position         : fixed;
+    top              : 56px;
+    width            : 100%;
+    height           : 56px;
+    background-color : white;
+    filter           : drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.41));
+    display          : flex;
+`
+
+const SelectorBtn = styled.div<{isActive : boolean}>`
+    flex-grow       : 1;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+    ${(props) => props.isActive && `color: #A7005A;`};
+`
+
+const SelectorItemName = styled.span`
+    font-family : 'Roboto', sans-serif;
+    font-weight : bolder;
+    font-size   : 12px;
+`
+
+
 const HomePage = () => {
     const [mode, setMode] = useState(Mode.Hot);
     
@@ -21,31 +48,7 @@ const HomePage = () => {
     }
 
     const Selector = () => {
-        const SelectorWrapper = styled.div`
-            z-index          : 100;
-            position         : fixed;
-            top              : 56px;
-            width            : 100%;
-            height           : 56px;
-            background-color : white;
-            filter           : drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.41));
-            display          : flex;
-        `
-
-        const SelectorBtn = styled.div<{isActive : boolean}>`
-            flex-grow       : 1;
-            display         : flex;
-            flex-direction  : column;
-            align-items     : center;
-            justify-content : center;
-            ${(props) => props.isActive && `color: #A7005A;`};
-        `
-
-        const SelectorItemName = styled.span`
-            font-family : 'Roboto', sans-serif;
-            font-weight : bolder;
-            font-size   : 12px;
-        `
+        
         return(
             <SelectorWrapper>
                 <SelectorBtn 
