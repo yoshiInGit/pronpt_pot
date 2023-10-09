@@ -29,6 +29,7 @@ const SelectorBtn = styled.div<{isActive : boolean}>`
     align-items     : center;
     justify-content : center;
     ${(props) => props.isActive && `color: #A7005A;`};
+    cursor: pointer;
 `
 
 const SelectorItemName = styled.span`
