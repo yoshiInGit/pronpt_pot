@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Mode from "../domain/mode";
 import { getPromptRepository } from "../repository/i_prompt_repository";
+import { Prompt } from "../domain/prompt";
 
 export const usePromptsByMode = ({mode}:{mode : Mode}) =>{
         const [prompts, setPrompts]     = useState<Prompt[]>([]);

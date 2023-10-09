@@ -9,7 +9,7 @@ type promtParams = {
     userId : string,
 }
 
-class Prompt{
+export class Prompt{
     uuid   : string
     title  : string
     prompt : string

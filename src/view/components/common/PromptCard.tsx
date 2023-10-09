@@ -6,6 +6,7 @@ import Icon from "../basic/Icon";
 import Column from "../layout/Column";
 import Row from "../layout/Row";
 import { useSimpleUser } from "../../../usecase/user_use_case";
+import { Prompt } from "../../../domain/prompt";
 
 
 const PromptCard = ({prompt} : {prompt : Prompt}) => {
