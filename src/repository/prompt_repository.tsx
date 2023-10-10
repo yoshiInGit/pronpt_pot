@@ -1,5 +1,7 @@
 import Mode from "../domain/mode";
+import { Prompt, ToPostPrompt } from "../domain/prompt";
 import { IPromptRepository } from "./i_prompt_repository";
+import { v4 as uuidv4 } from 'uuid';
 
 export class FakePromptRepository implements IPromptRepository{
     
@@ -19,6 +21,21 @@ export class FakePromptRepository implements IPromptRepository{
       return this.instance;
     }
 
+    async addPrompt({ toPostPrompt }: { toPostPrompt: ToPostPrompt; }): Promise<void> {
+      const prompt = new Prompt({
+        uuid : uuidv4(),
+        title : toPostPrompt.title,
+        prompt : toPostPrompt.prompt,
+        ans : toPostPrompt.ans,
+        memo : toPostPrompt.memo,
+        book : 0,
+        aiName : toPostPrompt.aiName,
+        userId : "user"
+      })
+
+      this.prompts.push(prompt);
+    }
+
     async getPromptsByMode({ mode }: { mode: Mode; }): Promise<Prompt[]> {
         return this.prompts;
     }
@@ -31,10 +48,6 @@ export class FakePromptRepository implements IPromptRepository{
         }
 
         return this.prompts[0];
-    }
-
-    async addPrompt({ prompt }: { prompt: Prompt; }): Promise<void> {
-        this.prompts.push(prompt);
     }
 
 }

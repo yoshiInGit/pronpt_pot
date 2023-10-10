@@ -90,8 +90,9 @@ const PostBtn = styled.div`
 `
 
 const PostPage = () => {
-    //TODO
     const onSubmit = () => {
+        //TODO 
+
     }
 
     const [title , setTitle]   = useState<string>("");

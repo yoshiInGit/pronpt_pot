@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Mode from "../domain/mode";
 import { getPromptRepository } from "../repository/i_prompt_repository";
-import { Prompt } from "../domain/prompt";
+import { Prompt, ToPostPrompt as ToPostPrompt } from "../domain/prompt";
 
 export const usePromptsByMode = ({mode}:{mode : Mode}) =>{
         const [prompts, setPrompts]     = useState<Prompt[]>([]);
@@ -56,14 +56,14 @@ export const usePromptById = ({id} : {id : string}) => {
 }
 
 
-export const usePostPrompt = ({prompt} : {prompt : Prompt}) => {
+export const usePostPrompt = ({toPostPrompt} : {toPostPrompt : ToPostPrompt}) => {
   const [error, setError]         = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(()=>{
     try{
       (async ()=>{
-        await getPromptRepository().addPrompt({prompt : prompt});
+        await getPromptRepository().addPrompt({toPostPrompt : toPostPrompt});
         setIsLoading(false);
       })()  
     } catch (e : any){

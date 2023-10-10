@@ -30,3 +30,28 @@ export class Prompt{
         this.userId = userId;
     }
 }
+
+
+type toPostPromtParams = {
+    title  : string,
+    prompt : string,
+    ans    : string,
+    memo   : string,
+    aiName : string,
+}
+
+export class ToPostPrompt{
+    title  : string
+    prompt : string
+    ans    : string
+    memo   : string
+    aiName : string
+
+    constructor({title, prompt, ans, memo, aiName} : toPostPromtParams){
+        this.title  = title;
+        this.prompt = prompt;
+        this.ans    = ans;
+        this.memo   = memo;
+        this.aiName = aiName; 
+    }
+}
