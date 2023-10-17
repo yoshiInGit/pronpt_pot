@@ -9,6 +9,7 @@ const Wrapper = styled.div<{color : string | undefined}>`
 
 const Content = styled.div<{gap : number, center : boolean}>`
     flex-grow: 1;
+    flex-basis: 0;
     display: flex;
     flex-direction: column;
     gap: ${(props) => `${props.gap}px`};

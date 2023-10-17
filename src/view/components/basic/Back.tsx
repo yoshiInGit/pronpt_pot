@@ -5,6 +5,7 @@ const Back = styled.div`
         width: 100%;
         height: 100vh;
         overflow: scroll;
+        overflow-x: hidden;
 `
 
 export default Back;

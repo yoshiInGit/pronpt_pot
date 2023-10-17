@@ -19,6 +19,8 @@ export class Prompt{
     aiName : string
     userId : string
 
+    truncateLen = 324
+
     constructor({uuid, title, prompt, ans, memo, book, aiName, userId }:promtParams){
         this.uuid   = uuid;
         this.title  = title;
@@ -28,6 +30,20 @@ export class Prompt{
         this.book   = book;
         this.aiName = aiName;
         this.userId = userId;
+    }
+
+    truncatePrompt() {
+        if (this.prompt.length <= this.truncateLen) {
+          return this.prompt;
+        }
+        return this.prompt.slice(0, this.truncateLen) + '...';
+    }
+
+    truncateAns() {
+        if (this.ans.length <= this.truncateLen) {
+          return this.ans;
+        }
+        return this.ans.slice(0, this.truncateLen) + '...';
     }
 }
 

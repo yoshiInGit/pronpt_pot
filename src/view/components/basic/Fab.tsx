@@ -15,6 +15,11 @@ const Wrapper = styled.div`
     border-radius: 50%;
     background-color: #FF008A;
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.41));
+
+    @media (min-width: 1024px) {
+        right: 50%;
+        transform: translate(420px, 0);
+    }
 `
 
 type props  = {

@@ -8,8 +8,97 @@ import Row from "../layout/Row";
 import { useSimpleUser } from "../../../usecase/user_use_case";
 import { Prompt } from "../../../domain/prompt";
 
+// styled Components --------------------
+const HeadWrapper = styled.div`
+    width       : 100%;
+    display     : flex;
+    align-items : center;
+    gap         : 12px;
+`
+const User = styled.span`
+    color: #333333;
+    text-decoration: underline;
+`
+const Title = styled.div`
+    width        : 100%;
+    display      : flex;
+    align-items  : center;
+    height       : 40px;
+    font-weight  : bold;
+    color        : #333333;
+    font-family  : 'Kosugi Maru', sans-serif;
+`
 
-const PromptCard = ({prompt} : {prompt : Prompt}) => {
+const PromptTxt = styled.div`
+    width: 100%;
+    color: #686868;
+`
+
+const Msg = styled.div`
+    width: 100%;
+    color: black;
+    font-family  : 'Kosugi Maru', sans-serif;
+`
+
+const FooterWrapper = styled.div`
+    width: 100%;
+`
+
+const BookNum = styled.span`
+    font-size: 16px;
+    color : #FF004D;
+    font-weight: 600;
+`
+const AIName = styled.div`
+    width: 64px;
+    height: 20px;
+    background-color: #0AA924;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    color: white;
+    font-size: 12px;
+`
+// -------------------- styled Components 
+
+// Responsive Props ----------------------------
+const CardWrapper = styled.div`
+    width: 100%;
+
+    @media (min-width: 768px) {
+        width: 600px;
+    }
+
+    @media (min-width: 1024px) {
+        width: 680px;
+    }
+`
+const PromptSize = styled.span`
+    font-size: 12px;
+
+    @media (min-width: 768px) {
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 12px;
+    }
+`
+
+const MsgSize = styled.span`
+    font-size: 12px;
+
+    @media (min-width: 768px) {
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 14px;
+    }
+`
+// ---------------------------- Responsive Props 
+
+
+const PromptCard = ({prompt, booked} : {prompt : Prompt, booked : boolean}) => {
     const {user, isLoading, error} = useSimpleUser({id :prompt.userId});
     
     let userName : string | undefined = "";
@@ -18,73 +107,22 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
     }
 
     const Head = () => {
-
-        const Wrapper = styled.div`
-            width       : 100%;
-            display     : flex;
-            align-items : center;
-            gap         : 12px;
-        `
-        const User = styled.span`
-            color: #333333;
-            text-decoration: underline;
-        `
         return(
-            <Wrapper>
+            <HeadWrapper>
                 <User>{userName}</User>
                 <GrowSpace/>
-                <Icon name="link"/>
-                <Icon name="content_copy"/>
-            </Wrapper>
+                <Icon name="link" clickable/>
+                <Icon name="content_copy" clickable/>
+            </HeadWrapper>
         );
     }
 
-    const Title = styled.div`
-        width        : 100%;
-        display      : flex;
-        align-items  : center;
-        height       : 40px;
-        font-weight  : bold;
-        color        : #333333;
-        font-family  : 'Kosugi Maru', sans-serif;
-    `
-
-    const Prompt = styled.div`
-        color: #686868;
-        font-size: 8px;
-    `
-
-    const Msg = styled.div`
-        color: black;
-        font-size: 12px;
-    `
-
+    
     const Footer = () => {
-        const Wrapper = styled.div`
-            width: 100%;
-        `
-
-        const BookNum = styled.span`
-            font-size: 16px;
-            color : #FF004D;
-            font-weight: 600;
-        `
-        const AIName = styled.div`
-            width: 64px;
-            height: 20px;
-            background-color: #0AA924;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            color: white;
-            font-size: 12px;
-        `
-
         return(
-            <Wrapper>
+            <FooterWrapper>
                 <Row center>
-                    <Icon color="#FF004D" name="bookmark_border"/>
+                    <Icon color="#ff4980" name={booked ? "bookmark" : "bookmark_border"} clickable/>
                     <BookNum>{prompt.book}</BookNum>
 
                     <SpaceBox width={8}/>
@@ -93,40 +131,39 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
 
                     <GrowSpace/>
                 </Row>
-            </Wrapper>
+            </FooterWrapper>
         );
     }
 
     return(
-        <Card>
-            <Column
-                center
-                padding={28}>
-                    <SpaceBox height={16}/>
-
-                    <Head/>
-
-                    <Title>{prompt.title}</Title>
-
-                    <Prompt>{prompt.prompt}</Prompt>
-
-                    <SpaceBox height={16}/>
-
-                    <Msg>
-                        Ex
-                        <br></br>
-                        {prompt.ans}
-                    </Msg>
-
-                    <SpaceBox height={28}/>
-
-                    <Footer/>
-
-                    <SpaceBox height={12}/>
-
-            </Column>
-
-        </Card>
+        <CardWrapper>
+            <Card>
+                <Column
+                    center
+                    padding={12}>
+                        <SpaceBox height={16}/>
+                        <Head/>
+                        <Title>{prompt.title}</Title>
+                        <PromptTxt>
+                            <PromptSize>
+                                {">> "}
+                                {prompt.prompt}
+                            </PromptSize>
+                        </PromptTxt>
+                        <SpaceBox height={16}/>
+                        <Msg>
+                            <MsgSize>
+                                {"[Example Answer]:"}
+                                <br></br>
+                                {prompt.truncateAns()}
+                            </MsgSize>
+                        </Msg>
+                        <SpaceBox height={28}/>
+                        <Footer/>
+                        <SpaceBox height={12}/>
+                </Column>
+            </Card>
+        </CardWrapper>
     );
 }
 
