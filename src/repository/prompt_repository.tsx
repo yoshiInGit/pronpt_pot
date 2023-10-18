@@ -7,7 +7,7 @@ export class FakePromptRepository implements IPromptRepository{
     
     prompts : Prompt[] = [
       new Prompt({
-        uuid : "",
+        uuid : "prompt1",
         title : "卵焼の作り方",
         prompt : "おいしい卵焼きを作るためのコツを教えて",
         ans : `
@@ -36,27 +36,27 @@ export class FakePromptRepository implements IPromptRepository{
         ぜひ、これらのコツを参考に、おいしい卵焼きを作ってみてください。`,
         memo : "Example memo",
         book : 0,
-        aiName : "BARD",
-        userId : "",
+        aiId : "BARD",
+        userId : "user1",
       }),
       new Prompt({
-        uuid : "",
+        uuid : "prompt2",
         title : "title",
         prompt : "",
         ans : "",
         memo : "",
         book : 0,
-        aiName : "BARD",
-        userId : "",
+        aiId : "BARD",
+        userId : "user1",
       }),new Prompt({
-        uuid : "",
+        uuid : "prompt3",
         title : "title",
         prompt : "",
         ans : "",
         memo : "",
         book : 0,
-        aiName : "BARD",
-        userId : "",
+        aiId : "BARD",
+        userId : "user1",
       })
     ];
     
@@ -76,13 +76,13 @@ export class FakePromptRepository implements IPromptRepository{
 
     async addPrompt({ toPostPrompt }: { toPostPrompt: ToPostPrompt; }): Promise<void> {
       const prompt = new Prompt({
-        uuid : uuidv4(),
-        title : toPostPrompt.title,
+        uuid   : uuidv4(),
+        title  : toPostPrompt.title,
         prompt : toPostPrompt.prompt,
-        ans : toPostPrompt.ans,
-        memo : toPostPrompt.memo,
-        book : 0,
-        aiName : toPostPrompt.aiName,
+        ans    : toPostPrompt.ans,
+        memo   : toPostPrompt.memo,
+        book   : 0,
+        aiId   : toPostPrompt.aiName,
         userId : "user"
       })
 

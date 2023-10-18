@@ -1,5 +1,12 @@
-abstract class IUserRepository{
-    abstract getSimpleUser({id} : {id : string}) : Promise<SimpleUser>;
+import { MySelf } from "../domain/user";
+import { FakeUserRepository } from "./user_repository";
 
-    abstract getUser({id} : {id : string}) : Promise<User>;
+export abstract class IUserRepository{
+    abstract getId2Names({ids} : {ids : string[]}) : Map<string, string>;
+
+    abstract getMySelf() : MySelf;
+}
+
+export const getUserRepository = () : IUserRepository => {
+    return FakeUserRepository.getInstance();
 }

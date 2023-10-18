@@ -1,5 +1,7 @@
-class FakeUserRepository implements IUserRepository{
+import { MySelf } from "../domain/user";
+import { IUserRepository } from "./i_user_repository";
 
+export class FakeUserRepository implements IUserRepository{
     
     private static instance: FakeUserRepository | null = null;
 
@@ -15,10 +17,15 @@ class FakeUserRepository implements IUserRepository{
       return this.instance;
     }
 
-    getSimpleUser({ id }: { id: string; }): Promise<SimpleUser> {
-        throw new Error("Method not implemented.");
+    getId2Names({ ids }: { ids: string[]; }): Map<string, string> {
+      return new Map<string, string>().set("user1", "user1");
     }
-    getUser({ id }: { id: string; }): Promise<User> {
-        throw new Error("Method not implemented.");
+
+    getMySelf(): MySelf {
+      return new MySelf({
+        bookedPromptIds : ["prompt1"]
+      })
     }
+  
+
 }
