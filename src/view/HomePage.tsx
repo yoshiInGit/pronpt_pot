@@ -11,6 +11,8 @@ import Back from "./components/basic/Back";
 import Fab from "./components/basic/Fab";
 import { Link } from "react-router-dom";
 
+
+// Styled Components----------------
 const SelectorWrapper = styled.div`
     z-index          : 100;
     position         : fixed;
@@ -20,6 +22,7 @@ const SelectorWrapper = styled.div`
     background-color : white;
     filter           : drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.41));
     display          : flex;
+
 `
 
 const SelectorBtn = styled.div<{isActive : boolean}>`
@@ -38,11 +41,30 @@ const SelectorItemName = styled.span`
     font-size   : 12px;
 `
 
+// ---------------- Styled Components
+
+// Responsive Props--------------------
+const SelectorPad = styled.div<{width : number}>`
+    flex-grow: 1;
+    max-width: 0px;
+
+    @media (min-width: 768px) {
+        max-width: 120px;
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 400px;
+    }
+`
+// -------------------- Responsive Props
+
 
 const HomePage = () => {
+
     const [mode, setMode] = useState(Mode.Hot);
-    
-    const {prompts, isLoading, error} = usePromptsByMode({mode : mode});
+
+    const {toShowPrompts, isLoading, error} = usePromptsByMode({mode : mode});
+
 
     const onModeClick = (mode : Mode) => {
         setMode(mode);
@@ -52,6 +74,8 @@ const HomePage = () => {
         
         return(
             <SelectorWrapper>
+                <SelectorPad width={160}/>
+
                 <SelectorBtn 
                     isActive={mode == Mode.Hot}
                     onClick={()=>onModeClick(Mode.Hot)}>
@@ -71,15 +95,18 @@ const HomePage = () => {
                     onClick={()=>onModeClick(Mode.Random)}>
                     <Icon name="shuffle"/>
                     <SelectorItemName>Random</SelectorItemName>
-                 </SelectorBtn>             
+                 </SelectorBtn> 
+
+                 <SelectorPad width={160}/>
             </SelectorWrapper>
         );
     };
 
-
     let promptList = [];
-    for(let prompt of prompts){
-        promptList.push(<PromptCard prompt={prompt}/>)
+    for(let prompt of toShowPrompts){
+        promptList.push(
+            <PromptCard prompt={prompt}/>
+        )
     }
 
     return(

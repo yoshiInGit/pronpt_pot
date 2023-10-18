@@ -5,8 +5,8 @@ import GrowSpace from "../layout/GrowSpace";
 import Icon from "../basic/Icon";
 import Column from "../layout/Column";
 import Row from "../layout/Row";
-import { useSimpleUser } from "../../../usecase/user_use_case";
-import { Prompt } from "../../../domain/prompt";
+import { ToShowPrompt } from "../../../domain/prompt";
+import { useState } from "react";
 
 // styled Components --------------------
 const HeadWrapper = styled.div`
@@ -18,6 +18,7 @@ const HeadWrapper = styled.div`
 const User = styled.span`
     color: #333333;
     text-decoration: underline;
+    font-size: 14px;
 `
 const Title = styled.div`
     width        : 100%;
@@ -64,6 +65,7 @@ const AIName = styled.div`
 
 // Responsive Props ----------------------------
 const CardWrapper = styled.div`
+    cursor: pointer;
     width: 100%;
 
     @media (min-width: 768px) {
@@ -98,32 +100,68 @@ const MsgSize = styled.span`
 // ---------------------------- Responsive Props 
 
 
-const PromptCard = ({prompt, booked} : {prompt : Prompt, booked : boolean}) => {
-    const {user, isLoading, error} = useSimpleUser({id :prompt.userId});
+const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
     
-    let userName : string | undefined = "";
-    if(isLoading==false && error==undefined){
-        userName = user?.name;
-    }
-
+    const [isLinkAct, setIsLinkAct] = useState(false);
+    const [isCopyAct, setIsCopyAct] = useState(false);
     const Head = () => {
+        const onLinkCopy = () =>{
+            //TODO
+
+            setIsLinkAct(true);
+
+            setTimeout(() => {
+                setIsLinkAct(false);
+            }, 1500);
+        }
+
+        const onPromptCopy = () =>{
+            navigator.clipboard.writeText(prompt.prompt);
+
+            setIsCopyAct(true);
+            setTimeout(() => {
+                setIsCopyAct(false);
+            }, 1500);
+        }
+
+
         return(
             <HeadWrapper>
-                <User>{userName}</User>
+                <User>{prompt.userName}</User>
                 <GrowSpace/>
-                <Icon name="link" clickable/>
-                <Icon name="content_copy" clickable/>
+                <div onClick={onLinkCopy}><Icon name={isLinkAct ? "done" : "link"} clickable/></div>
+                <div onClick={onPromptCopy}><Icon name={isCopyAct ? "done" : "content_copy"} clickable/></div>
             </HeadWrapper>
         );
     }
 
-    
+
+    const [booked, setBooked] = useState<boolean>(prompt.isBooked);
+    const [bookedNum , setBookedNum] = useState<number>(prompt.book);
+
     const Footer = () => {
+        const onBookClick = () => {
+            //TODO update MySelf
+
+            if(booked==true){
+                setBookedNum(bookedNum - 1);
+            }else{
+                setBookedNum(bookedNum + 1);
+            }
+
+            setBooked(!booked);
+        }
+
         return(
             <FooterWrapper>
                 <Row center>
-                    <Icon color="#ff4980" name={booked ? "bookmark" : "bookmark_border"} clickable/>
-                    <BookNum>{prompt.book}</BookNum>
+                    <div onClick={onBookClick}>
+                        <Icon 
+                            clickable
+                            color="#ff4980" 
+                            name={booked ? "bookmark" : "bookmark_border"}/>
+                    </div>
+                    <BookNum>{bookedNum}</BookNum>
 
                     <SpaceBox width={8}/>
 
@@ -153,7 +191,7 @@ const PromptCard = ({prompt, booked} : {prompt : Prompt, booked : boolean}) => {
                         <SpaceBox height={16}/>
                         <Msg>
                             <MsgSize>
-                                {"[Example Answer]:"}
+                                {`[${prompt.aiName}]:`}
                                 <br></br>
                                 {prompt.truncateAns()}
                             </MsgSize>
