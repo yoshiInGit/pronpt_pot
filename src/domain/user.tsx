@@ -1,38 +1,7 @@
-type userParams = {
-    uuid        : string,
-    name        : string,
-    inf         : string,
-    myPrompts   : string[],
-    bookPrompts : string[],
-}
+export class MySelf{
+    bookedPromptIds : string[];
 
-class User{
-    uuid        : string
-    name        : string
-    inf         : string
-    myPrompts   : string[]
-    bookPrompts : string[]
-    
-    constructor({uuid, name,inf, myPrompts, bookPrompts}: userParams){
-        this.uuid        = uuid;
-        this.name        = name;
-        this.inf         = inf;
-        this.myPrompts   = myPrompts;
-        this.bookPrompts = bookPrompts;
-    }
-}
-
-type simpleUserParm = {
-    uuid : string,
-    name : string,
-}
-
-class SimpleUser {
-    uuid : string
-    name : string
-
-    constructor({uuid, name} : simpleUserParm){
-        this.uuid = uuid;
-        this.name = name;
+    constructor({bookedPromptIds} : {bookedPromptIds : string[]}){
+        this.bookedPromptIds = bookedPromptIds;
     }
 }
