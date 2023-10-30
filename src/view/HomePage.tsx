@@ -41,9 +41,6 @@ const SelectorItemName = styled.span`
     font-size   : 12px;
 `
 
-// ---------------- Styled Components
-
-// Responsive Props--------------------
 const SelectorPad = styled.div<{width : number}>`
     flex-grow: 1;
     max-width: 0px;
@@ -56,7 +53,7 @@ const SelectorPad = styled.div<{width : number}>`
         max-width: 400px;
     }
 `
-// -------------------- Responsive Props
+// ---------------- Styled Components
 
 
 const HomePage = () => {

@@ -41,16 +41,15 @@ export const usePromptsByMode = ({mode}:{mode : Mode}) =>{
 
                 toShowPrompts.push(
                   new ToShowPrompt({
-                    uuid     : prompt.uuid,
-                    title    : prompt.title,
-                    prompt   : prompt.prompt,
-                    ans      : prompt.ans,
-                    memo     : prompt.memo,
-                    book     : prompt.book,
-                    userId   : prompt.userId,
-                    userName : name,
-                    isBooked : isBooked,
-                    aiName   : aIDic.id2Name.get(prompt.aiId) ?? ""
+                    uuid         : prompt.uuid,
+                    title        : prompt.title,
+                    conversation : prompt.conversation,
+                    memo         : prompt.memo,
+                    book         : prompt.book,
+                    userId       : prompt.userId,
+                    userName     : name,
+                    isBooked     : isBooked,
+                    aiName       : aIDic.id2Name.get(prompt.aiId) ?? ""
                   })
                 )
               }

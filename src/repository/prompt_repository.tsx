@@ -9,8 +9,8 @@ export class FakePromptRepository implements IPromptRepository{
       new Prompt({
         uuid : "prompt1",
         title : "卵焼の作り方",
-        prompt : "おいしい卵焼きを作るためのコツを教えて",
-        ans : `
+        conversation : ["おいしい卵焼きを作るためのコツを教えて",
+        `
         おいしい卵焼きを作るコツは、次の3つです。
         
         卵液をよく混ぜる
@@ -33,7 +33,7 @@ export class FakePromptRepository implements IPromptRepository{
         巻き終わりを内側に折り込んで、完成。
         また、巻き方を工夫することで、見た目にもおいしい卵焼きになります。例えば、卵焼き器を傾けて、卵液を薄く広げるようにすると、きれいな巻き目になります。また、卵焼きを巻くときに、まきすの下に箸を2本かませて空気の通りを作ると、卵焼きの下面が蒸れにくくなります。
         
-        ぜひ、これらのコツを参考に、おいしい卵焼きを作ってみてください。`,
+        ぜひ、これらのコツを参考に、おいしい卵焼きを作ってみてください。`],
         memo : "Example memo",
         book : 0,
         aiId : "BARD",
@@ -42,8 +42,7 @@ export class FakePromptRepository implements IPromptRepository{
       new Prompt({
         uuid : "prompt2",
         title : "title",
-        prompt : "",
-        ans : "",
+        conversation : ["",""],
         memo : "",
         book : 0,
         aiId : "BARD",
@@ -51,8 +50,7 @@ export class FakePromptRepository implements IPromptRepository{
       }),new Prompt({
         uuid : "prompt3",
         title : "title",
-        prompt : "",
-        ans : "",
+        conversation : ["",""],
         memo : "",
         book : 0,
         aiId : "BARD",
@@ -76,14 +74,13 @@ export class FakePromptRepository implements IPromptRepository{
 
     async addPrompt({ toPostPrompt }: { toPostPrompt: ToPostPrompt; }): Promise<void> {
       const prompt = new Prompt({
-        uuid   : uuidv4(),
-        title  : toPostPrompt.title,
-        prompt : toPostPrompt.prompt,
-        ans    : toPostPrompt.ans,
-        memo   : toPostPrompt.memo,
-        book   : 0,
-        aiId   : toPostPrompt.aiName,
-        userId : "user"
+        uuid         : uuidv4(),
+        title        : toPostPrompt.title,
+        conversation : toPostPrompt.conversation,
+        memo         : toPostPrompt.memo,
+        book         : 0,
+        aiId         : toPostPrompt.aiName,
+        userId       : "user"
       })
 
       console.log(this.prompts);
