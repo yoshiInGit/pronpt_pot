@@ -61,9 +61,7 @@ const AIName = styled.div`
     color: white;
     font-size: 12px;
 `
-// -------------------- styled Components 
 
-// Responsive Props ----------------------------
 const CardWrapper = styled.div`
     cursor: pointer;
     width: 100%;
@@ -97,7 +95,8 @@ const MsgSize = styled.span`
         font-size: 14px;
     }
 `
-// ---------------------------- Responsive Props 
+// -------------------- styled Components 
+
 
 
 const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
@@ -116,7 +115,7 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
         }
 
         const onPromptCopy = () =>{
-            navigator.clipboard.writeText(prompt.prompt);
+            navigator.clipboard.writeText(prompt.conversation[0]);
 
             setIsCopyAct(true);
             setTimeout(() => {
@@ -185,7 +184,7 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
                         <PromptTxt>
                             <PromptSize>
                                 {">> "}
-                                {prompt.prompt}
+                                {prompt.truncatePrompt()}
                             </PromptSize>
                         </PromptTxt>
                         <SpaceBox height={16}/>
