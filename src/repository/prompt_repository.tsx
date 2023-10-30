@@ -86,6 +86,8 @@ export class FakePromptRepository implements IPromptRepository{
         userId : "user"
       })
 
+      console.log(this.prompts);
+
       this.prompts.push(prompt);
     }
 
