@@ -8,6 +8,10 @@ import Card from "./components/basic/Card";
 import { ToPostPrompt } from "../domain/prompt";
 import { postPrompt } from "../usecase/prompt_use_case";
 import AlertDialog from "./components/common/AlertDialog";
+import Typo from "./components/basic/Typo";
+import Icon from "./components/basic/Icon";
+import Chat from "./post_page/Chat";
+import AISelectDialog from "./post_page/AISelectDialog";
 
 // Styled components -------------------
 const PostTitle = styled.div`
@@ -15,27 +19,40 @@ const PostTitle = styled.div`
     font-size: 22px;
     font-weight: 500;
     color: #333333;
-
 `
 
 const SecTitle = styled.div`
     font-family  : 'Kosugi Maru', sans-serif;
     font-size: 18px;
 
+    @media (min-width: 768px) {
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 16px;
+    }
+
 `
 
 const SecSub = styled.div`
     font-family  : 'Kosugi Maru', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     color: #7f7f7f;
+
+    @media (min-width: 768px) {
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 10px;
+    }
 `
 
-const Input = styled.input`
+const TitleInput = styled.input`
     font-family  : 'Kosugi Maru', sans-serif;
     border: 1px solid #969696;
     background-color: transparent;
     appearance: none;
-    font-size: 18px;
+    font-size: 16px;
     padding: 2px;
     line-height: 30px;
     border-radius: 4px;
@@ -51,24 +68,34 @@ const TextField = styled.textarea`
     padding: 8px;
 `
 
-const Select = styled.select`
-    width: 40%;
-    line-height: 24px;
-    font-size: 18px;
-    padding: 4px;
+const SelectBox = styled.div`
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 3px;
+    display: flex;
+    cursor: pointer;
+`
+const SelectBoxValue = styled.div`
+    flex-grow: 1;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 `
 
-const Option = styled.option`
-    font-size: 18px;
-`
-const Alert = styled.span`
-    color: red;
-    font-size: 12px;
-    font-family  : 'Kosugi Maru', sans-serif;
-`
-// ------------------- Styled components 
 
-// Responsive Props--------------------
+const Selector = ({value, onClick} : {value : string, onClick : ()=>void}) => {
+    
+    return(
+        <>
+            <SelectBox onClick={onClick}>
+                <SpaceBox width={8}/>
+                <SelectBoxValue>{value}</SelectBoxValue>
+                <Icon name="expand_more"/>
+            </SelectBox>
+        </>
+    )
+}
+
 const CardSize = styled.div`
     width: 100%;
 
@@ -81,22 +108,8 @@ const CardSize = styled.div`
     }
 `
 
-// --------------- Responsive Props
+// ------------------- Styled components 
 
-
-const Selector = ({options, onChange} : {options : string[], onChange: (val : string) => void}) => {
-    let optionList = [];
-    for(let option of options){
-        optionList.push(<Option value={option}>{option}</Option>);
-    }
-
-
-    return(
-        <Select onChange={(event)=>{onChange(event.target.value)}}>
-            {optionList}
-        </Select>
-    );
-}
 
 const PostBtn = styled.div`
     width            : 100%;
@@ -118,14 +131,12 @@ const PostPage = () => {
 
     const [title , setTitle]   = useState<string>("");
     const [AIType, setAIType]  = useState<string>("");
-    const [prompt , setPrompt] = useState<string>("");
-    const [ans , setAns]       = useState<string>("");
+    const [conversation , setConversation] = useState<string[]>([]);
     const [memo , setMemo]     = useState<string>("");
 
     const [titleAlert, setTitleAlert]   = useState(false);
     const [aiAlert, setAiAlert]         = useState(false);
-    const [promptAlert, setPromptAlert] = useState(false);
-    const [ansAlert, setAnsAlert]       = useState(false);
+    const [chatAlert, setChatALert]     = useState(false);
 
     const [blockSend, setBlockSend] = useState(false);
 
@@ -136,6 +147,11 @@ const PostPage = () => {
         setShowSendModal(false);
         window.location.href = "/";
     }
+
+    const [showEmptyAlertDialog, setShowEmptyAlertDialog] = useState(false);
+
+    const [showAISelectDialog, setShowAISelectDialog] = useState(false);
+
 
     const _valid = () => {
         let isOk = true;
@@ -150,14 +166,13 @@ const PostPage = () => {
             setAiAlert(true);
         }
 
-        if(prompt == ""){
+        if(conversation.includes("")){
             isOk = false;
-            setPromptAlert(true);
+            setChatALert(true)
         }
 
-        if(ans == ""){
-            isOk = false;
-            setAnsAlert(true);
+        if(isOk==false){
+            setShowEmptyAlertDialog(true);
         }
 
         return isOk
@@ -170,15 +185,13 @@ const PostPage = () => {
         setBlockSend(true);
 
         const toPostPrompt = new ToPostPrompt({
-            title  : title,
-            prompt : prompt,
-            ans    : ans,
-            memo   : memo,
-            aiName : AIType,
+            title        : title,
+            conversation : conversation,
+            memo         : memo,
+            aiName       : AIType,
         })
 
         try {
-            // Code that may throw an error
             await postPrompt({toPostPrompt : toPostPrompt});
 
             setSendedModalTItle("新しいプロンプトを投稿しました！")
@@ -205,6 +218,20 @@ const PostPage = () => {
                 show={showSendedModal}
                 onOK={closeSendedModal}
                 />
+            
+            <AlertDialog
+                title="未入力の項目があります!"
+                message="メモ以外の項目は必ず埋めてください！"
+                show={showEmptyAlertDialog}
+                onOK={()=>{setShowEmptyAlertDialog(false)}}
+            />
+
+            <AISelectDialog
+                show={showAISelectDialog}
+                onSelect={(value: string)=>{
+                    setAIType(value);
+                    setShowAISelectDialog(false);
+                }}/>
 
             <Header home/>
 
@@ -224,50 +251,53 @@ const PostPage = () => {
                                 <SpaceBox height={40}/>
 
                                 <SecTitle>タイトル</SecTitle>
+                                <SpaceBox height={4}/>
                                 <SecSub>プロンプトの内容を一言で</SecSub>
                                 <SpaceBox height={8}/>
-                                <Input 
+                                <TitleInput 
                                     onChange={(event)=>{setTitle(event.target.value)}}/>
                                 <SpaceBox height={4}/>
-                                {titleAlert && <Alert>**この項目は必ず入力して下さい</Alert>}
+                                {titleAlert && <Typo size={10} color="red">**この項目は必ず入力して下さい</Typo>}
 
-                                <SpaceBox height={32}/>
+                                <SpaceBox height={24}/>
 
-                                <SecTitle>タイプ</SecTitle>
+                                <SecTitle>モデル</SecTitle>
+                                <SpaceBox height={4}/>
                                 <SecSub>どのAIを使った？</SecSub>
                                 <SpaceBox height={8}/>
+
                                 <Selector 
-                                    options={["ChatGPT" ,"BARD"]}
-                                    onChange={(val)=>{setAIType(val)}}/>
+                                    value={AIType!="" ? AIType : "----"}  
+                                    onClick={()=>{
+                                        setShowAISelectDialog(true);
+                                    }}
+                                />
+
                                 <SpaceBox height={4}/>
-                                {aiAlert && <Alert>**この項目は必ず入力して下さい</Alert>}
+                                {aiAlert && <Typo size={10} color="red">**この項目は必ず入力して下さい</Typo>}
 
-                                <SpaceBox height={32}/>
+                                <SpaceBox height={52}/>
 
 
-                                <SecTitle>プロンプト</SecTitle>
-                                <SecSub>AIになんと入力した？</SecSub>
-                                <SpaceBox height={8}/>
-                                <TextField 
-                                    rows={20} 
-                                    onChange={(event)=>{setPrompt(event.target.value)}}/>
+                                <SecTitle>会話</SecTitle>
                                 <SpaceBox height={4}/>
-                                {promptAlert && <Alert>**この項目は必ず入力して下さい</Alert>}
-
-                                <SpaceBox height={32}/>
-
-                                <SecTitle>返答</SecTitle>
-                                <SecSub>AIはなんて返した？</SecSub>
-                                <SpaceBox height={8}/>
-                                <TextField 
-                                    rows={20} 
-                                    onChange={(event)=>{setAns(event.target.value)}}/>
+                                <SecSub>AIとの会話を書こう</SecSub>
                                 <SpaceBox height={4}/>
-                                {ansAlert && <Alert>**この項目は必ず入力して下さい</Alert>}
+                                {chatAlert && <Typo size={10} color="red">**この項目は必ず入力して下さい</Typo>}
 
-                                <SpaceBox height={32}/>
+                                
+                                <SpaceBox height={20}/>
 
-                                <SecTitle>メモ</SecTitle>
+                                <Chat 
+                                    setConversation={(conversation : string[])=>{
+                                        setConversation([...conversation]);
+                                    }}/>
+
+
+                                <SpaceBox height={52}/>
+
+                                <SecTitle>メモ(任意)</SecTitle>
+                                <SpaceBox height={4}/>
                                 <SecSub>補足しておきたいこと</SecSub>
                                 <SpaceBox height={8}/>
                                 <TextField 

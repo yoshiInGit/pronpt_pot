@@ -36,27 +36,28 @@ const Content = styled.div`
 
 const Title = styled.div`
 
-    font-size: 20px;
+    font-size: 18px;
 
     @media (min-width: 768px) {
-        font-size: 22px;        
+        font-size: 18px;        
     }
 
     @media (min-width: 1024px) {
-        font-size: 22px;       
+        font-size: 18px;       
     }
     
 `
 
 const Body = styled.div`
     white-space: pre-line;
+    font-size: 14px;        
 
     @media (min-width: 768px) {
-        font-size: 16px;        
+        font-size: 14px;        
     }
 
     @media (min-width: 1024px) {
-        font-size: 16px;       
+        font-size: 14px;       
     }
     
 `
