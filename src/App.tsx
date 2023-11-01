@@ -15,6 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/post" element={<PostPage/>}/>
+        <Route path="/prompt" element={<PromptPage/>}>
+          <Route path=":promptId" element={<PromptPage/>}/>
+        </Route>
       </Routes>
     </ErrorBoundary>
     </>

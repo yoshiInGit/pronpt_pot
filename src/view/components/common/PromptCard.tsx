@@ -7,6 +7,7 @@ import Column from "../layout/Column";
 import Row from "../layout/Row";
 import { ToShowPrompt } from "../../../domain/prompt";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // styled Components --------------------
 const HeadWrapper = styled.div`
@@ -100,6 +101,11 @@ const MsgSize = styled.span`
 
 
 const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
+
+    const navigate = useNavigate();
+    const onCardClick = ()=> {
+        navigate(`/prompt/${prompt.uuid}`)
+    }
     
     const [isLinkAct, setIsLinkAct] = useState(false);
     const [isCopyAct, setIsCopyAct] = useState(false);
@@ -173,7 +179,7 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
     }
 
     return(
-        <CardWrapper>
+        <CardWrapper onClick={onCardClick}>
             <Card>
                 <Column
                     center

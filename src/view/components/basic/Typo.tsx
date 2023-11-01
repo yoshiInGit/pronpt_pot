@@ -1,16 +1,19 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-const Text = styled.span<{size : number, color : string | undefined}>`
+const Text = styled.span<{size : number, color : string | undefined, lineBreak : boolean | undefined, fontWeight : string | undefined}>`
     font-family  : 'Kosugi Maru', sans-serif;
 
     ${(props)=> props.color && `color: ${props.color};`}
+    ${(props)=> props.lineBreak && `white-space: pre-line;`}
+    ${(props)=> props.fontWeight && `font-weight: ${props.fontWeight};`}
+
     font-size: ${(props)=>`${props.size}px`};
 `
 
-const Typo = ({size, color, children} : {size : number, color? : string, children?: ReactNode;}) => {
+const Typo = ({size, color, children, lineBreak, fontWeight} : {size : number, color? : string, children?: ReactNode; lineBreak? : boolean, fontWeight? : string}) => {
     return (
-        <Text size={size} color={color}>
+        <Text size={size} color={color} lineBreak={lineBreak} fontWeight={fontWeight}>
             {children}
         </Text>
     )
