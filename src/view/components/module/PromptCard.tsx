@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import SpaceBox from "../layout/SpaceBox";
+import SpaceBox from "../../layout/SpaceBox";
 import Card from "../basic/Card";
-import GrowSpace from "../layout/GrowSpace";
+import GrowSpace from "../../layout/GrowSpace";
 import Icon from "../basic/Icon";
-import Column from "../layout/Column";
-import Row from "../layout/Row";
+import Column from "../../layout/Column";
+import Row from "../../layout/Row";
 import { ToShowPrompt } from "../../../domain/prompt";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

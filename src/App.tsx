@@ -1,8 +1,8 @@
 import React from "react";
-import HomePage from "./view/HomePage"
-import MyPage from "./view/MyPage"
-import PostPage from "./view/PostPage"
-import PromptPage from "./view/PromptPage"
+import HomePage from "./view/pages/HomePage"
+import MyPage from "./view/pages/MyPage"
+import PostPage from "./view/pages/PostPage"
+import PromptPage from "./view/pages/PromptPage"
 import ErrorBoundary from "./ErrorBoundary";
 import { Route, Routes } from "react-router-dom";
 

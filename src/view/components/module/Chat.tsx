@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import SpaceBox from "../components/layout/SpaceBox";
-import Typo from "../components/basic/Typo";
+import SpaceBox from "../../layout/SpaceBox";
+import Typo from "../basic/Typo";
 import { useEffect, useState } from "react";
-import Column from "../components/layout/Column";
-import Row from "../components/layout/Row";
-import Card from "../components/basic/Card";
-import SizedBox from "../components/layout/SizedBox";
-import Icon from "../components/basic/Icon";
-import GrowSpace from "../components/layout/GrowSpace";
-import Clickable from "../components/basic/Clickable";
+import Column from "../../layout/Column";
+import Row from "../../layout/Row";
+import Card from "../basic/Card";
+import SizedBox from "../../layout/SizedBox";
+import Icon from "../basic/Icon";
+import GrowSpace from "../../layout/GrowSpace";
+import Clickable from "../basic/Clickable";
 
 const TextField = styled.textarea`
     font-family   : 'Kosugi Maru', sans-serif;

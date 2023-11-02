@@ -1,15 +1,15 @@
-import Header from "./components/basic/Header";
-import Back from "./components/basic/Back";
+import Header from "../components/module/Header";
+import Back from "../components/basic/Back";
 import styled from "styled-components";
-import Column from "./components/layout/Column";
-import Card from "./components/basic/Card";
-import SpaceBox from "./components/layout/SpaceBox";
-import Row from "./components/layout/Row";
-import GrowSpace from "./components/layout/GrowSpace";
-import Icon from "./components/basic/Icon";
-import Typo from "./components/basic/Typo";
-import Center from "./components/layout/Center";
-import Fab from "./components/basic/Fab";
+import Column from "../layout/Column";
+import Card from "../components/basic/Card";
+import SpaceBox from "../layout/SpaceBox";
+import Row from "../layout/Row";
+import GrowSpace from "../layout/GrowSpace";
+import Icon from "../components/basic/Icon";
+import Typo from "../components/basic/Typo";
+import Center from "../layout/Center";
+import Fab from "../components/module/Fab";
 
 const CardWrapper = styled.div`
     width: 100%;

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Header from "./components/basic/Header";
-import SpaceBox from "./components/layout/SpaceBox";
-import Column from "./components/layout/Column";
-import Back from "./components/basic/Back";
-import Card from "./components/basic/Card";
+import Header from "../components/module/Header";
+import SpaceBox from "../layout/SpaceBox";
+import Column from "../layout/Column";
+import Back from "../components/basic/Back";
+import Card from "../components/basic/Card";
 
 const MyPage = () => {
     const UserName = styled.div`

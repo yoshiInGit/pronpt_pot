@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import SpaceBox from "../layout/SpaceBox";
-import { Link } from "react-router-dom";
+import SpaceBox from "../../layout/SpaceBox";
+import { useNavigate } from "react-router-dom";
+import Clickable from "../basic/Clickable";
 
 const Wrapper = styled.div<{isShadow : boolean}>`
     z-index          : 100;
@@ -44,14 +45,15 @@ const Space = styled.div`
 `
 
 type props = {
-    isShadow? : boolean,
+    shadow? : boolean,
     home?     : boolean,
     menu?     : boolean,
     post?     : boolean,
 }
 
-const Header = ({isShadow = true, home=false, menu=false, post=false} : props) => {
+const Header = ({shadow= true, home=false, menu=false, post=false} : props) => {
     
+    const navigator = useNavigate();
 
     const leadings = [];
     if(menu===true){
@@ -62,9 +64,9 @@ const Header = ({isShadow = true, home=false, menu=false, post=false} : props) =
 
     if(home===true){
         leadings.push(
-            <Link to="/">
+            <Clickable onClick={()=>{navigator("/")}}>
                 <HomeBtn className="material-icons">home</HomeBtn>
-            </Link>
+            </Clickable>
         );
     }
 
@@ -79,7 +81,7 @@ const Header = ({isShadow = true, home=false, menu=false, post=false} : props) =
 
     return(
         <>
-            <Wrapper isShadow={isShadow}>
+            <Wrapper isShadow={shadow}>
                 <SpaceBox width={8}/>
 
                 {leadings}
