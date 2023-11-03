@@ -8,6 +8,12 @@ import Row from "../../layout/Row";
 import { ToShowPrompt } from "../../../domain/prompt";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ResponsiveWidth from "../../layout/ResponsiveWidth";
+import Typo from "../basic/Typo";
+import AITag from "./AITag";
+import Center from "../../layout/Center";
+import User from "./User";
+import Clickable from "../basic/Clickable";
 
 // styled Components --------------------
 const HeadWrapper = styled.div`
@@ -15,11 +21,6 @@ const HeadWrapper = styled.div`
     display     : flex;
     align-items : center;
     gap         : 12px;
-`
-const User = styled.span`
-    color: #333333;
-    text-decoration: underline;
-    font-size: 14px;
 `
 const Title = styled.div`
     width        : 100%;
@@ -45,60 +46,6 @@ const Msg = styled.div`
 const FooterWrapper = styled.div`
     width: 100%;
 `
-
-const BookNum = styled.span`
-    font-size: 16px;
-    color : #FF004D;
-    font-weight: 600;
-`
-const AIName = styled.div`
-    width: 64px;
-    height: 20px;
-    background-color: #0AA924;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    color: white;
-    font-size: 12px;
-`
-
-const CardWrapper = styled.div`
-    cursor: pointer;
-    width: 100%;
-
-    @media (min-width: 768px) {
-        width: 600px;
-    }
-
-    @media (min-width: 1024px) {
-        width: 680px;
-    }
-`
-const PromptSize = styled.span`
-    font-size: 12px;
-
-    @media (min-width: 768px) {
-    }
-
-    @media (min-width: 1024px) {
-        font-size: 12px;
-    }
-`
-
-const MsgSize = styled.span`
-    font-size: 12px;
-
-    @media (min-width: 768px) {
-    }
-
-    @media (min-width: 1024px) {
-        font-size: 14px;
-    }
-`
-// -------------------- styled Components 
-
-
 
 const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
 
@@ -161,16 +108,20 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
             <FooterWrapper>
                 <Row center>
                     <div onClick={onBookClick}>
+                        <Center>
                         <Icon 
                             clickable
                             color="#ff4980" 
                             name={booked ? "bookmark" : "bookmark_border"}/>
+                        </Center>
                     </div>
-                    <BookNum>{bookedNum}</BookNum>
+                    <Typo size={16} color="#FF004D">
+                        {bookedNum}
+                    </Typo>
 
                     <SpaceBox width={8}/>
 
-                    <AIName>{prompt.aiName}</AIName>
+                    <AITag>{prompt.aiName}</AITag>
 
                     <GrowSpace/>
                 </Row>
@@ -179,34 +130,36 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
     }
 
     return(
-        <CardWrapper onClick={onCardClick}>
-            <Card>
-                <Column
-                    center
-                    padding={12}>
-                        <SpaceBox height={16}/>
-                        <Head/>
-                        <Title>{prompt.title}</Title>
-                        <PromptTxt>
-                            <PromptSize>
-                                {">> "}
-                                {prompt.truncatePrompt()}
-                            </PromptSize>
-                        </PromptTxt>
-                        <SpaceBox height={16}/>
-                        <Msg>
-                            <MsgSize>
-                                {`[${prompt.aiName}]:`}
-                                <br></br>
-                                {prompt.truncateAns()}
-                            </MsgSize>
-                        </Msg>
-                        <SpaceBox height={28}/>
-                        <Footer/>
-                        <SpaceBox height={12}/>
-                </Column>
-            </Card>
-        </CardWrapper>
+        <ResponsiveWidth onClick={onCardClick}>
+            <Clickable>
+                <Card>
+                    <Column
+                        center
+                        padding={12}>
+                            <SpaceBox height={16}/>
+                            <Head/>
+                            <Title>{prompt.title}</Title>
+                            <PromptTxt>
+                                <Typo size={12}>
+                                    {">> "}
+                                    {prompt.truncatePrompt()}
+                                </Typo>
+                            </PromptTxt>
+                            <SpaceBox height={16}/>
+                            <Msg>
+                                <Typo size={14}>
+                                    {`[${prompt.aiName}]:`}
+                                    <br></br>
+                                    {prompt.truncateAns()}
+                                </Typo>
+                            </Msg>
+                            <SpaceBox height={28}/>
+                            <Footer/>
+                            <SpaceBox height={12}/>
+                    </Column>
+                </Card>
+            </Clickable>
+        </ResponsiveWidth>
     );
 }
 
