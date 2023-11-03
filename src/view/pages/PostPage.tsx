@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Header from "../components/module/Header";
 import SpaceBox from "../layout/SpaceBox";
 import Back from "../components/basic/Back";
@@ -9,104 +8,15 @@ import { ToPostPrompt } from "../../domain/prompt";
 import { postPrompt } from "../../usecase/prompt_use_case";
 import AlertDialog from "../components/module/AlertDialog";
 import Typo from "../components/basic/Typo";
-import Icon from "../components/basic/Icon";
 import Chat from "../components/module/Chat";
 import AISelectDialog from "../components/module/AISelectDialog";
 import { useNavigate } from "react-router-dom";
+import ResponsiveWidth from "../layout/ResponsiveWidth";
+import TextInput from "../components/module/TextInput";
+import TextField from "../components/module/TextField";
+import Selector from "../components/module/Selector";
+import Button from "../components/module/Button";
 
-const CardTitle = styled.div`
-    font-family  : 'Kosugi Maru', sans-serif;
-    font-size    : 22px;
-    font-weight  : 500;
-    color        : #333333;
-`
-
-const SecTitle = styled.div`
-    font-family  : 'Kosugi Maru', sans-serif;
-    font-size: 16px;
-`
-
-const SecSub = styled.div`
-    font-family : 'Kosugi Maru', sans-serif;
-    font-size   : 10px;
-    color       : #7f7f7f;
-`
-
-const TitleInput = styled.input`
-    font-family      : 'Kosugi Maru', sans-serif;
-    border           : 1px solid #969696;
-    background-color : transparent;
-    appearance       : none;
-    font-size        : 16px;
-    padding          : 2px;
-    line-height      : 30px;
-    border-radius    : 4px;
-`
-
-const TextField = styled.textarea`
-    font-family   : 'Kosugi Maru', sans-serif;
-    resize        : none;
-    border-radius : 4px;
-    appearance    : none;
-    border        : 1px solid #969696;
-    font-size     : 12px;
-    padding       : 8px;
-`
-
-const SelectBox = styled.div`
-    width         : 30%;
-    border        : 1px solid black;
-    border-radius : 3px;
-    display       : flex;
-    cursor        : pointer;
-`
-const SelectBoxValue = styled.div`
-    flex-grow       : 1;
-    display         : flex;
-    justify-content : start;
-    align-items     : center;
-`
-
-
-const Selector = ({value, onClick} : {value : string, onClick : ()=>void}) => {
-    
-    return(
-        <>
-            <SelectBox onClick={onClick}>
-                <SpaceBox width={8}/>
-                <SelectBoxValue>{value}</SelectBoxValue>
-                <Icon name="expand_more"/>
-            </SelectBox>
-        </>
-    )
-}
-
-const CardWrapper = styled.div`
-    width: 100%;
-
-    @media (min-width: 768px) {
-        width: 600px;
-    }
-
-    @media (min-width: 1024px) {
-        width: 680px;
-    }
-`
-
-const PostBtn = styled.div`
-    width            : 100%;
-    height           : 48px;
-    background-color : #FF008A;
-    color            : white;
-    border-radius    : 3px;
-    display          : flex;
-    align-items      : center;
-    justify-content  : center;
-    filter           : drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.41));
-    font-family      : 'Kosugi Maru', sans-serif;
-    font-size        : 20px;
-    cursor           : pointer;
-`
 
 const PostPage = () => {
     // Dialogs--------------------------
@@ -211,26 +121,19 @@ const PostPage = () => {
         }
     }
 
-    const SendBtn = () => {
-        return(
-            <CardWrapper>
-                <PostBtn onClick={onSubmit}>投稿する</PostBtn>
-            </CardWrapper>
-        );
-    }
-
     // ----------------------------------- SendBtn 
 
-    const [AIType, setAIType]              = useState<string>("");
-    const [title , setTitle]               = useState<string>("");
-    const [conversation , setConversation] = useState<string[]>([]);
-    const [memo , setMemo]                 = useState<string>("");
     
     const [titleAlert, setTitleAlert]   = useState(false);
     const [aiAlert, setAiAlert]         = useState(false);
     const [chatAlert, setChatALert]     = useState(false);
 
-    
+    const [AIType, setAIType]              = useState<string>("");
+    const [title , setTitle]               = useState<string>("");
+    const [conversation , setConversation] = useState<string[]>([]);
+    const [memo , setMemo]                 = useState<string>("");
+
+
     return(
         <Back>
             <Dialogs/>            
@@ -244,28 +147,38 @@ const PostPage = () => {
 
                 <SpaceBox height={56}/>
 
-                <CardWrapper>
+                <ResponsiveWidth>
                     <Card>
                         <Column padding={8}>
                             <SpaceBox height={16}/>
-                                <CardTitle>新しいプロンプトを投稿する</CardTitle>
+                                <Typo size={22} color="#333333">
+                                    新しいプロンプトを投稿する
+                                </Typo>
 
                                 <SpaceBox height={40}/>
 
-                                <SecTitle>タイトル</SecTitle>
+                                <Typo size={16}>
+                                    タイトル
+                                </Typo>
                                 <SpaceBox height={4}/>
-                                <SecSub>プロンプトの内容を一言で</SecSub>
+                                <Typo size={10} color="#7f7f7f">
+                                    プロンプトの内容を一言で
+                                </Typo>
                                 <SpaceBox height={8}/>
-                                <TitleInput 
+                                <TextInput 
                                     onChange={(event)=>{setTitle(event.target.value)}}/>
                                 <SpaceBox height={4}/>
                                 {titleAlert && <Typo size={10} color="red">**この項目は必ず入力して下さい</Typo>}
 
                                 <SpaceBox height={24}/>
 
-                                <SecTitle>モデル</SecTitle>
+                                <Typo size={16}>
+                                    モデル
+                                </Typo>
                                 <SpaceBox height={4}/>
-                                <SecSub>どのAIを使った？</SecSub>
+                                <Typo size={10} color="#7f7f7f">
+                                    どのAIを使った？
+                                </Typo>
                                 <SpaceBox height={8}/>
                                 <Selector 
                                     value={AIType!="" ? AIType : "----"}  
@@ -278,9 +191,13 @@ const PostPage = () => {
                                 <SpaceBox height={52}/>
 
 
-                                <SecTitle>会話</SecTitle>
+                                <Typo size={16}>
+                                    会話
+                                </Typo>
                                 <SpaceBox height={4}/>
-                                <SecSub>AIとの会話を書こう</SecSub>
+                                <Typo size={10} color="#7f7f7f">
+                                    AIとの会話を書こう
+                                </Typo>
                                 <SpaceBox height={4}/>
                                 {chatAlert && <Typo size={10} color="red">**この項目は必ず入力して下さい</Typo>}
 
@@ -291,13 +208,15 @@ const PostPage = () => {
                                         setConversation([...conversation]);
                                     }}/>
 
-
                                 <SpaceBox height={52}/>
 
-
-                                <SecTitle>メモ(任意)</SecTitle>
+                                <Typo size={16}>
+                                    メモ(任意)
+                                </Typo>
                                 <SpaceBox height={4}/>
-                                <SecSub>補足しておきたいこと</SecSub>
+                                <Typo size={10} color="#7f7f7f">
+                                    補足しておきたいこと
+                                </Typo>
                                 <SpaceBox height={8}/>
                                 <TextField 
                                     rows={8}
@@ -307,9 +226,11 @@ const PostPage = () => {
                             <SpaceBox height={16}/>
                         </Column>
                     </Card>
-                </CardWrapper>
+                </ResponsiveWidth>
 
-                <SendBtn/>
+                <ResponsiveWidth>
+                    <Button onClick={onSubmit}>投稿する</Button>
+                </ResponsiveWidth>
                 
                 <SpaceBox height={32}/>
             </Column>
