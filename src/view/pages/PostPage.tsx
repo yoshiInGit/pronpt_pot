@@ -4,8 +4,6 @@ import Back from "../components/basic/Back";
 import Column from "../components/layout/Column";
 import { useState } from "react";
 import Card from "../components/basic/Card";
-import { ToPostPrompt } from "../../domain/prompt";
-import { postPrompt } from "../../usecase/prompt_use_case";
 import AlertDialog from "../components/module/AlertDialog";
 import Typo from "../components/basic/Typo";
 import Chat from "../components/module/Chat";
@@ -97,15 +95,8 @@ const PostPage = () => {
 
         setBlockSend(true);
 
-        const toPostPrompt = new ToPostPrompt({
-            title        : title,
-            conversation : conversation,
-            memo         : memo,
-            aiName       : AIType,
-        })
-
         try {
-            await postPrompt({toPostPrompt : toPostPrompt});
+            // TODO
 
             setSendedModalTItle("新しいプロンプトを投稿しました！")
             setSendedModalMsg("プロンプトを投稿しました！\n投稿したプロンプトはマイページから確認できます。");

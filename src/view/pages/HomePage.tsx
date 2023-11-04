@@ -1,6 +1,4 @@
 import Header from "../components/module/Header";
-import SpaceBox from "../components/layout/SpaceBox";
-import Column from "../components/layout/Column";
 import Icon from "../components/basic/Icon";
 import { useState } from 'react';
 import Mode from "../../domain/mode";
@@ -9,6 +7,8 @@ import Fab from "../components/module/Fab";
 import { useNavigate } from "react-router-dom";
 import Clickable from "../components/basic/Clickable";
 import ModeSelector from "../components/module/ModeSelector";
+import Column from "../components/layout/Column";
+import SpaceBox from "../components/layout/SpaceBox";
 
 
 const HomePage = () => {
