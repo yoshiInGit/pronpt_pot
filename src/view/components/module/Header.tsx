@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SpaceBox from "../../layout/SpaceBox";
+import SpaceBox from "../layout/SpaceBox";
 import { useNavigate } from "react-router-dom";
 import Clickable from "../basic/Clickable";
 

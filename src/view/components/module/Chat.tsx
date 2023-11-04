@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import SpaceBox from "../../layout/SpaceBox";
+import SpaceBox from "../layout/SpaceBox";
 import Typo from "../basic/Typo";
 import { useEffect, useState } from "react";
-import Column from "../../layout/Column";
-import Row from "../../layout/Row";
+import Column from "../layout/Column";
+import Row from "../layout/Row";
 import Card from "../basic/Card";
-import SizedBox from "../../layout/SizedBox";
+import SizedBox from "../layout/SizedBox";
 import Icon from "../basic/Icon";
-import GrowSpace from "../../layout/GrowSpace";
+import GrowSpace from "../layout/GrowSpace";
 import Clickable from "../basic/Clickable";
 
 const TextField = styled.textarea`

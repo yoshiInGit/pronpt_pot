@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import SpaceBox from "../../layout/SpaceBox"
+import SpaceBox from "../layout/SpaceBox"
 import Icon from "../basic/Icon"
 
 const SelectBox = styled.div`

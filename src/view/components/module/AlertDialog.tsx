@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Card from "../basic/Card";
-import Column from "../../layout/Column";
-import Row from "../../layout/Row";
-import GrowSpace from "../../layout/GrowSpace";
-import SpaceBox from "../../layout/SpaceBox";
+import Column from "../layout/Column";
+import Row from "../layout/Row";
+import GrowSpace from "../layout/GrowSpace";
+import SpaceBox from "../layout/SpaceBox";
 
 const Wrapper = styled.div`
     position: fixed;

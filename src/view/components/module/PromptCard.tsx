@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import SpaceBox from "../../layout/SpaceBox";
+import SpaceBox from "../layout/SpaceBox";
 import Card from "../basic/Card";
-import GrowSpace from "../../layout/GrowSpace";
+import GrowSpace from "../layout/GrowSpace";
 import Icon from "../basic/Icon";
-import Column from "../../layout/Column";
-import Row from "../../layout/Row";
+import Column from "../layout/Column";
+import Row from "../layout/Row";
 import { ToShowPrompt } from "../../../domain/prompt";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ResponsiveWidth from "../../layout/ResponsiveWidth";
+import ResponsiveWidth from "../layout/ResponsiveWidth";
 import Typo from "../basic/Typo";
 import AITag from "./AITag";
-import Center from "../../layout/Center";
+import Center from "../layout/Center";
 import User from "./User";
 import Clickable from "../basic/Clickable";
 

@@ -1,10 +1,10 @@
 import styled from "styled-components"
-import GrowSpace from "../../layout/GrowSpace"
-import Row from "../../layout/Row"
-import SpaceBox from "../../layout/SpaceBox"
+import GrowSpace from "../layout/GrowSpace"
+import Row from "../layout/Row"
+import SpaceBox from "../layout/SpaceBox"
 import Icon from "../basic/Icon"
 import Typo from "../basic/Typo"
-import Center from "../../layout/Center"
+import Center from "../layout/Center"
 
 const ChatIconContainer = styled.div`
     width  : 40px;

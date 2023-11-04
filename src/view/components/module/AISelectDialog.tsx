@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Card from "../basic/Card";
-import Column from "../../layout/Column";
+import Column from "../layout/Column";
 import Typo from "../basic/Typo";
-import SpaceBox from "../../layout/SpaceBox";
+import SpaceBox from "../layout/SpaceBox";
 import Clickable from "../basic/Clickable";
 
 const DialogWrapper = styled.div`

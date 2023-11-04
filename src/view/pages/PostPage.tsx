@@ -1,7 +1,7 @@
 import Header from "../components/module/Header";
-import SpaceBox from "../layout/SpaceBox";
+import SpaceBox from "../components/layout/SpaceBox";
 import Back from "../components/basic/Back";
-import Column from "../layout/Column";
+import Column from "../components/layout/Column";
 import { useState } from "react";
 import Card from "../components/basic/Card";
 import { ToPostPrompt } from "../../domain/prompt";
@@ -11,7 +11,7 @@ import Typo from "../components/basic/Typo";
 import Chat from "../components/module/Chat";
 import AISelectDialog from "../components/module/AISelectDialog";
 import { useNavigate } from "react-router-dom";
-import ResponsiveWidth from "../layout/ResponsiveWidth";
+import ResponsiveWidth from "../components/layout/ResponsiveWidth";
 import TextInput from "../components/module/TextInput";
 import TextField from "../components/module/TextField";
 import Selector from "../components/module/Selector";

@@ -1,10 +1,8 @@
 import Header from "../components/module/Header";
-import PromptCard from "../components/module/PromptCard";
-import SpaceBox from "../layout/SpaceBox";
-import Column from "../layout/Column";
+import SpaceBox from "../components/layout/SpaceBox";
+import Column from "../components/layout/Column";
 import Icon from "../components/basic/Icon";
 import { useState } from 'react';
-import { usePromptsByMode } from "../../usecase/prompt_use_case";
 import Mode from "../../domain/mode";
 import Back from "../components/basic/Back";
 import Fab from "../components/module/Fab";
@@ -19,14 +17,8 @@ const HomePage = () => {
 
     const [mode, setMode] = useState(Mode.Hot);
 
-    const {toShowPrompts, isLoading, error} = usePromptsByMode({mode : mode});
 
-    let promptList : JSX.Element[] = [];
-    for(let prompt of toShowPrompts){
-        promptList.push(
-            <PromptCard prompt={prompt}/>
-        )
-    }
+    let promptCardList : JSX.Element[] = [];
 
     const onModeSelect = (mode : Mode) => {
         setMode(mode);
@@ -47,7 +39,7 @@ const HomePage = () => {
 
             <SpaceBox height={116}/>
 
-            {promptList}
+            {promptCardList}
 
             <SpaceBox height={56}/>
         </Column>
