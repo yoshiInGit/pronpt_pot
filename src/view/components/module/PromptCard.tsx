@@ -5,7 +5,7 @@ import GrowSpace from "../layout/GrowSpace";
 import Icon from "../basic/Icon";
 import Column from "../layout/Column";
 import Row from "../layout/Row";
-import { ToShowPrompt } from "../../../domain/prompt";
+import { Prompt } from "../../../domain/prompt";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveWidth from "../layout/ResponsiveWidth";
@@ -47,7 +47,7 @@ const FooterWrapper = styled.div`
     width: 100%;
 `
 
-const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
+const PromptCard = ({prompt} : {prompt : Prompt}) => {
 
     const navigate = useNavigate();
     const onCardClick = ()=> {
@@ -68,7 +68,7 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
         }
 
         const onPromptCopy = () =>{
-            navigator.clipboard.writeText(prompt.conversation[0]);
+            navigator.clipboard.writeText(prompt.chat[0]);
 
             setIsCopyAct(true);
             setTimeout(() => {
@@ -142,7 +142,7 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
                             <PromptTxt>
                                 <Typo size={12}>
                                     {">> "}
-                                    {prompt.truncatePrompt()}
+                                    {prompt.introPrompt()}
                                 </Typo>
                             </PromptTxt>
                             <SpaceBox height={16}/>
@@ -150,7 +150,7 @@ const PromptCard = ({prompt} : {prompt : ToShowPrompt}) => {
                                 <Typo size={14}>
                                     {`[${prompt.aiName}]:`}
                                     <br></br>
-                                    {prompt.truncateAns()}
+                                    {prompt.introAnswer()}
                                 </Typo>
                             </Msg>
                             <SpaceBox height={28}/>
