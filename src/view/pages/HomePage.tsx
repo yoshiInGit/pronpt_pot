@@ -9,27 +9,43 @@ import Clickable from "../components/basic/Clickable";
 import ModeSelector from "../components/module/ModeSelector";
 import Column from "../components/layout/Column";
 import SpaceBox from "../components/layout/SpaceBox";
+import { usePromptsByMode } from "../../hooks/usePromptByMode";
+import PromptCard from "../components/module/PromptCard";
+import Typo from "../components/basic/Typo";
 
 
 const HomePage = () => {
-
+    
+    const [mode, setMode]  = useState(Mode.Hot);
     const navigator = useNavigate();
-
-    const [mode, setMode] = useState(Mode.Hot);
-
-
-    let promptCardList : JSX.Element[] = [];
 
     const onModeSelect = (mode : Mode) => {
         setMode(mode);
     }
 
+    let promptCardList : JSX.Element[] = [];
+    const { prompts, isLoading, error} = usePromptsByMode({mode : mode});
+    if(isLoading){
+        // promptCardList =  [(<Typo size={24}>Loading...</Typo>)];
+    }
+    if(error){
+        // promptCardList =  [(<Typo size={24}> Error: {error}</Typo>)];
+    }
+    if(prompts != null){
+        for(let prompt of prompts){
+            promptCardList.push(
+                <PromptCard prompt={prompt}/>
+            )
+        }
+    }
+
+    
     return(
     <Back>
 
         <Header shadow={false} menu/>
         
-        <ModeSelector onSelect={onModeSelect} mode={mode}/>
+        <ModeSelector onSelect={(value)=>{onModeSelect(value)}} mode={mode}/>
         
         <Column 
             center

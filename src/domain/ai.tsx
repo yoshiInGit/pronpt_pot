@@ -4,7 +4,7 @@ type AiProps = {
     url  : string,
 }
 
-class Ai{
+export class Ai{
     uuid : string
     name : string
     url  : string
