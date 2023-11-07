@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import { Prompt } from "../domain/prompt";
 import Config from "../config";
 
-export const usePrompt = () => {
+export const usePrompt = ({id} : {id : string}) => {
     const [prompt, setPrompt]       = useState<Prompt | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError]         = useState<any>(null);
 
     if(Config.MODE == "LOCAL"){
+      useEffect(()=>{
         setIsLoading(false);
         setPrompt(fakePrompt);
+      },[id])
     }
 
     useEffect(() => {

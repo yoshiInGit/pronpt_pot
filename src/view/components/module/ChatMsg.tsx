@@ -34,7 +34,7 @@ const ChatMsg = ({msg, isAI} : {msg : string, isAI : boolean}) => {
             <GrowSpace/>
 
             <ChatMsgWrapper>
-                <Typo size={14} lineBreak>
+                <Typo size={14} lineBreak color={isAI ? "black" : "#404040"}>
                     {msg}
                 </Typo>
             </ChatMsgWrapper>
