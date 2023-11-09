@@ -60,6 +60,15 @@ const PostPage = () => {
 
     // -------------------------- Dialogs
 
+    const [titleAlert, setTitleAlert]   = useState(false);
+    const [aiAlert, setAiAlert]         = useState(false);
+    const [chatAlert, setChatALert]     = useState(false);
+
+    const [AIType, setAIType]              = useState<string>("");
+    const [title , setTitle]               = useState<string>("");
+    const [conversation , setConversation] = useState<string[]>([]);
+    const [memo , setMemo]                 = useState<string>("");
+
 
     // SendBtn -----------------------------------
     const [blockSend, setBlockSend] = useState(false);
@@ -96,6 +105,7 @@ const PostPage = () => {
         setBlockSend(true);
 
         try {
+            console.log(memo)
             // TODO
 
             setSendedModalTItle("新しいプロンプトを投稿しました！")
@@ -115,15 +125,6 @@ const PostPage = () => {
     // ----------------------------------- SendBtn 
 
     
-    const [titleAlert, setTitleAlert]   = useState(false);
-    const [aiAlert, setAiAlert]         = useState(false);
-    const [chatAlert, setChatALert]     = useState(false);
-
-    const [AIType, setAIType]              = useState<string>("");
-    const [title , setTitle]               = useState<string>("");
-    const [conversation , setConversation] = useState<string[]>([]);
-    const [memo , setMemo]                 = useState<string>("");
-
 
     return(
         <Back>
