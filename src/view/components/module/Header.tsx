@@ -2,6 +2,9 @@ import styled from "styled-components";
 import SpaceBox from "../layout/SpaceBox";
 import { useNavigate } from "react-router-dom";
 import Clickable from "../basic/Clickable";
+import DrawerMenu from "./DrawerMenu";
+import { useState } from "react";
+import Center from "../layout/Center";
 
 const Wrapper = styled.div<{isShadow : boolean}>`
     z-index          : 100;
@@ -21,6 +24,7 @@ const HomeBtn = styled.span`
 
 const MenuBtn = styled.span`
     font-size: 28px;
+    cursor: pointer;
 `
 
 const Title = styled.span`
@@ -58,7 +62,11 @@ const Header = ({shadow= true, home=false, menu=false, post=false} : props) => {
     const leadings = [];
     if(menu===true){
         leadings.push(
-            <MenuBtn className="material-icons">menu</MenuBtn>
+            <Clickable onClick={()=>{setShowDrawer(true)}}>
+                <Center>
+                    <MenuBtn className="material-icons">menu</MenuBtn>
+                </Center>
+            </Clickable>
         );
     }
 
@@ -78,9 +86,12 @@ const Header = ({shadow= true, home=false, menu=false, post=false} : props) => {
         )
     }
 
+    const [showDrawer, setShowDrawer] = useState(false);
+
 
     return(
         <>
+            {showDrawer && <DrawerMenu onClose={()=>{setShowDrawer(false)}}/>}
             <Wrapper isShadow={shadow}>
                 <SpaceBox width={8}/>
 

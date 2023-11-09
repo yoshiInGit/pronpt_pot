@@ -11,8 +11,6 @@ import Column from "../components/layout/Column";
 import SpaceBox from "../components/layout/SpaceBox";
 import { usePromptsByMode } from "../../hooks/usePromptByMode";
 import PromptCard from "../components/module/PromptCard";
-import Typo from "../components/basic/Typo";
-
 
 const HomePage = () => {
     

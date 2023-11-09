@@ -6,7 +6,7 @@ import Icon from "../basic/Icon";
 import Column from "../layout/Column";
 import Row from "../layout/Row";
 import { Prompt } from "../../../domain/prompt";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveWidth from "../layout/ResponsiveWidth";
 import Typo from "../basic/Typo";
@@ -57,8 +57,13 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
     const [isLinkAct, setIsLinkAct] = useState(false);
     const [isCopyAct, setIsCopyAct] = useState(false);
     const Head = () => {
-        const onLinkCopy = () =>{
-            //TODO
+        const onLinkCopy = (e : React.MouseEvent) =>{
+            e.stopPropagation() 
+
+            const currentUrl = window.location.href;
+            const url = new URL(currentUrl);
+            const promptUrl = `${url.origin}/prompt/${prompt.uuid}`;
+            navigator.clipboard.writeText(promptUrl);
 
             setIsLinkAct(true);
 
@@ -67,7 +72,13 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
             }, 1500);
         }
 
-        const onPromptCopy = () =>{
+        const onUserClick = (e : React.MouseEvent)=> {
+            e.stopPropagation() 
+            navigate(`/user/${prompt.userUuid}`)
+        }
+
+        const onPromptCopy = (e : React.MouseEvent) =>{
+            e.stopPropagation() 
             navigator.clipboard.writeText(prompt.chat[0]);
 
             setIsCopyAct(true);
@@ -79,7 +90,7 @@ const PromptCard = ({prompt} : {prompt : Prompt}) => {
 
         return(
             <HeadWrapper>
-                <User>{prompt.userName}</User>
+                <User onClick={onUserClick}>{prompt.userName}</User>
                 <GrowSpace/>
                 <div onClick={onLinkCopy}><Icon name={isLinkAct ? "done" : "link"} clickable/></div>
                 <div onClick={onPromptCopy}><Icon name={isCopyAct ? "done" : "content_copy"} clickable/></div>
